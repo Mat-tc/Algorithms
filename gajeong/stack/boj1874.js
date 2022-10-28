@@ -16,27 +16,20 @@ const stdin = (
 const arr = stdin.map((el) => el.trim());
 
 const solution = (input) => {
-  let status = Array(input[0] + 1).fill(true);
-  let ans = [];
-  let index = 0;
-  for (let i = 1; i < input.length + 1; i++) {
-    while (index != input[i]) {
-      if (index < input[i] && status[index]) {
-        index += 1;
-        console.log('1', index, input[i]);
-        ans.push('+');
-      } else if (index > input[i] && status[index]) {
-        ans.push('-');
-        console.log('2', index, input[i]);
-        status[index] = false;
-        index -= 1;
-      } else break;
+  let stack = [];
+  let index = 1;
+  let ans = '';
+  for (let i = 1; i <= parseInt(input[0]); i++) {
+    stack.push(i);
+    ans += '+\n';
+
+    while (stack[stack.length - 1] === parseInt(input[index])) {
+      stack.pop();
+      ans += '-\n';
+      index++;
     }
-    console.log('3', index, input[i]);
-    ans.push('-');
-    status[index] = false;
-    index -= 1;
   }
+  console.log(!stack.length ? ans : 'NO');
 };
 
 solution(arr);

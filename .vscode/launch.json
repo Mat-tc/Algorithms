@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch Boj2169",
+      "request": "launch",
+      "mainClass": "Boj2169",
+      "projectName": "Algorithms_baab4772"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
