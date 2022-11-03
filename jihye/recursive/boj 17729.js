@@ -12,7 +12,7 @@ function Hanoi(n,start,assi,end){
         return;
     }
     else{
-        Hanoi(n-1, start, end, assi)
+        Hanoi(n-1, start, end, assi)        //젤 큰 원반 빼고 시작지점에 있는 n-1개를 assi로 옮긴다 
         arr.push([start, end])
         Hanoi(n-1, assi, start, end)
     }
@@ -20,7 +20,8 @@ function Hanoi(n,start,assi,end){
 
 
 
-Hanoi(2,1,2,3)
+Hanoi(n,1,2,3)
+console.log(cnt)
 console.log(arr);
 
 
