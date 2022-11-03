@@ -9,12 +9,13 @@ const stdin = (
     -16 -22 -57 -33 99
     7 -76 -11 77 15
 `
-).split('\n');
-const arr = stdin.map((el) => el.trim());
+)
+  .trim()
+  .split('\n');
 
-const solution = (input) => {};
+const solution = (stdin) => {};
 
-solution(arr);
+solution(input);
 
 // const input = [];
 // require('readline')
