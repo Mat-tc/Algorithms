@@ -9,7 +9,7 @@ const arr = stdin.map((el) => el.trim());
 
 const solution = (input) => {
   const s = Number(input[0]);
-  const time = Array(1000 + 1).fill(false);
+  const time = Array(1000 + 1).fill(false); // 화면만
   const queue = [[1, 0, 0]];
   time[1] = true;
 
