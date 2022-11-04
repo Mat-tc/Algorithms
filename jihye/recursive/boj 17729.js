@@ -14,7 +14,7 @@ function Hanoi(n,start,assi,end){
     else{
         Hanoi(n-1, start, end, assi)        //젤 큰 원반 빼고 시작지점에 있는 n-1개를 assi로 옮긴다 
         arr.push([start, end])
-        Hanoi(n-1, assi, start, end)
+        Hanoi(n-1, assi, start, end)    //assi 에서 end로 옮긴다   ( assi )
     }
 }
 
