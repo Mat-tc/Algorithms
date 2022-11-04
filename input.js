@@ -13,9 +13,9 @@ const stdin = (
   .trim()
   .split('\n');
 
-const solution = (stdin) => {};
+const solution = (input) => {};
 
-solution(input);
+solution(stdin);
 
 // const input = [];
 // require('readline')
