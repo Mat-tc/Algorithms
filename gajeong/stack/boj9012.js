@@ -13,7 +13,6 @@ const arr = stdin.map((el) => el.trim());
 
 // ( 이 나오면 +1 , ) 이면 -1
 const solution = (input) => {
-  let ans = [];
   for (let i = 1; i < parseInt(input[0]) + 1; i++) {
     let line = input[i].split('');
     let index = 0;
@@ -24,9 +23,8 @@ const solution = (input) => {
       index += 1;
     }
     //인덱스가 line의 길이만큼 도달하고, sum = 0 일때만 성공
-    index === line.length && sum == 0 ? ans.push('YES') : ans.push('NO');
+    index === line.length && sum == 0 ? console.log('YES') : console.log('NO');
   }
-  console.log(ans.join('\n'));
 };
 
 solution(arr);
