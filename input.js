@@ -1,7 +1,7 @@
-const fs = require("fs");
+const fs = require('fs');
 const stdin = (
-  process.platform === "linux"
-    ? fs.readFileSync("/dev/stdin").toString()
+  process.platform === 'linux'
+    ? fs.readFileSync('/dev/stdin').toString()
     : `5 5
     10 25 7 8 13
     68 24 -78 63 32
@@ -11,10 +11,10 @@ const stdin = (
 `
 )
   .trim()
-  .split("\n");
+  .split('\n');
 
 const solution = (input) => {
-  console.log("gg");
+  console.log('gg');
 };
 
 solution(stdin);
@@ -33,26 +33,31 @@ solution(stdin);
 /**
  * 제출용. 아래 로컬용을 지우고 제출하자.
  */
-let input = require("fs")
-  .readFileSync("/dev/stdin")
+let input = require('fs')
+  .readFileSync('/dev/stdin')
   .toString()
   .trim()
-  .split("\n");
+  .split('\n');
 /**
  * 로컬용, 예제.txt를 생성해서 예제를 복붙하자.
  */
-let input = require("fs")
-  .readFileSync("예제.txt")
+let input = require('fs')
+  .readFileSync('예제.txt')
   .toString()
   .trim()
-  .split("\n");
+  .split('\n');
 
 /**
  * 입력을 받는 파트
  * split을 하게 되면 값타입이 string되기에 number로 만들어 줘야 한다.
  */
-const [N, M] = input[0].split(" ").map((v) => +v);
-const arr = input.slice(1).map((v) => v.split(" ").map((v) => +v));
+const [N, M] = stdin[0].split(' ').map((v) => +v);
+const arr = stdin.slice(1).map((v) =>
+  v
+    .trim()
+    .split(' ')
+    .map((v) => +v)
+);
 
 /* 
      로직
@@ -61,7 +66,7 @@ const arr = input.slice(1).map((v) => v.split(" ").map((v) => +v));
 /**
  * console.log은 무겁다. 최대한 string에 담아서 한번에 출력하도록 하자.
  */
-const print = ans.map((row) => row.join(" ")).join("\n");
+const print = ans.map((row) => row.join(' ')).join('\n');
 console.log(print);
 
 // 순열
