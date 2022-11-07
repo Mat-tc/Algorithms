@@ -1,3 +1,6 @@
+const internal = require('stream');
+const { CLIENT_RENEG_LIMIT } = require('tls');
+
 let input = require('fs').readFileSync(__dirname+'/input.txt').toString().split('\n');  
 var n = Number(input[0].split(' '));    //모인 사람의 수 
 
@@ -18,19 +21,31 @@ function solution(n, arr){
 
     let assi = Array.from({length:n}, ()=>0 )
     let ch = Array.from({length:n}, ()=> 0)
-    let a = Array.from({length:n}, (v,i)=> i+1 )
 
     function DFS(k){
         const set = new Set( assi )
         let an = [...set]
-        
+        let sum = 0
+        let min = 1000000
         if(an.length === n){ //종료조건 
-            for (let i =0 ; i < an.length; i ++){
-               // an[i], an[i+1], //an[i+2], an[i+3]
+            for (let i =0 ; i <1; i ++){
+            
+                // an[i], an[i+1], //an[i+2], an[i+3]
                // an[i+1], an[i], //an[i+3], an[i+2]
-                
+               //스타트팀 //링크팀
+            //    let a = Number(arr[i][i+1]) + Number(arr[i+1][i])
+            //    let b = Number(arr[i+2][i+3]) +Number(arr[i+3][i+2])
+            //    let h = a-b
+            //   console.log(h)
+
+            let ss = Number(arr[an[i]][an[i+1]])+Number(arr[an[i+1]][an[i]])
+            let tt = Number(arr[an[i+2]][an[i+3]])+Number(arr[an[i+3]][an[i+2]])
+            console.log(sum)
+            sum  = Math.abs(ss-tt)
+               if( min > sum ) min = sum
 
             }
+            return answer = min
         }
         
         for ( let i =0 ; i < n ; i ++){
