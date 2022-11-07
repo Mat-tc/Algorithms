@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { join } = require('path');
+
 const stdin = (
   process.platform === 'linux'
     ? fs.readFileSync('/dev/stdin').toString()
