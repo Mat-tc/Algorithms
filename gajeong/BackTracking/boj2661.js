@@ -40,12 +40,11 @@ const solution = (N) => {
 // 문자열 비교 검색
 const checkStr = (str, cnt) => {
   if (cnt > 3) {
+    //새로 추가된 문자열 기준으로 split을 증가시키면서 비교
     for (let split = 2; split <= parseInt(cnt / 2); split++) {
-      for (let i = 1; i < parseInt(cnt / split); i++) {
-        let before = str.slice((i - 1) * split, (i - 1) * split + split);
-        let now = str.slice(i * split, i * split + split);
-        if (before === now) return false;
-      }
+      let a = str.slice(cnt - split, cnt);
+      let b = str.slice(cnt - split * 2, cnt - split);
+      if (a === b) return false;
     }
     return true;
   }
