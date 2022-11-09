@@ -1,3 +1,6 @@
 {
-  "prettier.semi": true
+  "prettier.semi": true,
+  "files.associations": {
+    "iostream": "cpp"
+  }
 }
