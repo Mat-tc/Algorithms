@@ -1,32 +1,48 @@
-const fs = require('fs');
-const input = fs.readFileSync(__dirname+'/input.txt').toString().split('\n');
+let input = require('fs').readFileSync(__dirname+'/input.txt').toString().split('\n');
+var n = parseInt(input[0].split(' ')); // 명령어 개수
+//명령어는 input[1]~ input[15]까지 있음
 
-const queue = [];
-const answer = [];
-const len = Number(input[0]);
+let queue = []
+let answer = []
 
-for(let i=1; i<=len; i++){
-    let cmd = input[i].split(' ');
-    switch(cmd[0]) {
-        case 'push':
-            queue.push(cmd[1]);
-            break;
-        case 'pop':
-            answer.push(queue.shift() || -1);
-            break;
-        case 'size':
-            answer.push(queue.length);
-            break;
-        case 'empty':
-            answer.push(queue[0] ? 0 : 1);
-            break;
-        case 'front':
-            answer.push(queue[0] || -1);
-            break;
-        case 'back':
-            answer.push(queue[queue.length-1] || -1);
-            break;
+for ( let i = 1 ; i< n+1 ; i++){
+    
+    let str = input[i].split(' ')   //str[0]은 명령어, str[1]은 숫자
+
+    switch(str[0]){
+
+        case 'push' :
+           queue.push(Number(str[1]))
+        break;
+
+        case 'pop' :
+           if(queue.length === 0) answer.push(-1)
+           else answer.push(queue.pop(queue[0]))
+         
+        break;
+
+        case 'size' :
+           answer.push(queue.length)
+        break;
+        
+        case 'empty' :
+           if(queue.length === 0) answer.push(1)
+           else answer.push(0)
+        break;
+
+        case 'front' :
+           if(queue.length ===0)answer.push(-1)
+           else answer.push(queue[0])
+        break;
+
+        case 'back' :
+           if(queue.length ===0 )answer.push(-1)
+           else answer.push(queue[queue.length-1])
+        break;
     }
+
 }
 
-console.log(answer.join('\n'));
+
+
+console.log(answer)
