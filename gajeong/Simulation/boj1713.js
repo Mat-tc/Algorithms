@@ -20,11 +20,10 @@ const solution = (stdin) => {
     if (photo.includes(num)) {
       status[num] += 1;
     } else {
-      // 넣어줌 초기화는 0
-      status[num] = 0;
+      // 넣어줌
       // photo 가 꽉 안찼다면 그냥 넣어줌
+      status[num] = 0;
       if (photo.length < N) {
-        status[num] = 0;
         photo.push(num);
       } else {
         let min = Math.min(...status);
@@ -32,12 +31,14 @@ const solution = (stdin) => {
         for (let i = 0; i < N; i++) {
           if (status[photo[i]] === min) {
             index = i;
-            status[photo[i]] === 1001;
             break;
           }
         }
-        photo.splice(index, index + 1);
+        //splice의 용도를 잘 알아야 함   splice(시작인덱스,삭제할 개수)
+        let del = photo.splice(index, 1);
+        status[del[0]] = 1001;
         photo.push(num);
+        status[num] = 0;
       }
     }
   });
