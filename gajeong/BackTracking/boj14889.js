@@ -25,13 +25,15 @@ const solution = (N, arr) => {
   let START_TEAM = [];
 
   const visited = Array(N).fill(false);
-  const back = (cnt) => {
+
+  const back = (cnt, idx) => {
     if (cnt === N / 2) {
       let LINK_TEAM = [];
       let SUM_OF_START_TEAM = 0;
       let SUM_OF_LINK_TEAM = 0;
-      // 다 돌면서 합침
 
+      // 나눈 팀의 2개씩 뽑은 순열 값을 더해주기 위함
+      // 2중 반복문  (n/2) ^ 2
       for (let i = 0; i < cnt; i++) {
         for (let j = 0; j < cnt; j++) {
           if (i === j) continue;
@@ -56,18 +58,20 @@ const solution = (N, arr) => {
       return;
     }
 
-    for (let i = 0; i < N; i++) {
+    // idx를 이용하여 [1,2,3], [3,2,1] 이런 식의 중복 조합을 만들지 않도록 함 !
+    for (let i = idx + 1; i < N; i++) {
       if (visited[i]) continue;
       START_TEAM.push(i);
+      idx = i;
       visited[i] = true;
 
-      back(cnt + 1);
+      back(cnt + 1, idx);
       START_TEAM.pop();
       visited[i] = false;
     }
   };
 
-  back(0);
+  back(0, 0);
   console.log(min);
 };
 
