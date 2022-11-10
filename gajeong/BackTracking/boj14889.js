@@ -19,7 +19,6 @@ const arr = stdin.slice(1).map((v) =>
     .map((v) => +v)
 );
 
-//시간초과 남 ㅎㅎ
 const solution = (N, arr) => {
   let min = -1;
   let START_TEAM = [];
@@ -58,7 +57,7 @@ const solution = (N, arr) => {
       return;
     }
 
-    // idx를 이용하여 [1,2,3], [3,2,1] 이런 식의 중복 조합을 만들지 않도록 함 !
+    // idx를 이용하여 [1,2,3], [2,1,3] 이런 식의 중복 조합을 만들지 않도록 함 !
     for (let i = idx + 1; i < N; i++) {
       if (visited[i]) continue;
       START_TEAM.push(i);
