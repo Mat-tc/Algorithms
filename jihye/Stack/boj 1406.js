@@ -1,49 +1,52 @@
 let input = require('fs').readFileSync(__dirname+'/input.txt').toString().split('\n');
-var strr = input[0].split(' '); // 단어
+var strr = input[0].trim().split('\n'); // 단어
 var n = parseInt(input[1])  //명령어 개수 
 
 // 명령어는 input[2]~ input[n+1]이렇게 존재함
 
-
 function solution(strr,n){
-    let str = strr[0].split('')
+    let str = strr[0]   //해당단어 
+    let ls = []
+    let rs = []
+    let answer = ''
 
-    for ( let i =2 ; i <= n+1; i ++){
-        let a = input[i].split(' ') //a[0] 은 명령어
-        let pos = str.length-1  //커서의 위치 
+    for ( let x of str){
+        ls.push(x)       
+    }
+
+
+    for( let i=2 ; i < n+2 ; i ++){
         
-        switch(a[0]){
-            
+        let [s, a] = input[i].split(' ')
+       
+        switch(s.trim()){
+
             case 'L' :
-                if(pos === 0 ) break; 
-                else pos--
+                if (ls.length) rs.push(ls.pop())
             break;
 
             case 'D' :
-                if(pos === str.length ) break; 
-                else pos++
+                if (rs.length) ls.push(rs.pop())
             break;
 
             case 'B' :
-                if(pos === 0 ) break; 
-                else str.pop()
+                 ls.pop()
             break;
 
             case 'P' :
-                pos++
-                str[pos] = a[1]
+                ls.push(a.replace(/\r/g, ""))
             break;
-            
+
         }
-
-
-
     }
-    return str.join('')
+
+    answer = ls.join('') + rs.reverse().join('')
+    console.log(answer)
 }
 
+solution(strr,n)
 
-console.log(solution(strr,n))
+
 
 
 
