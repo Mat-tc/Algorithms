@@ -1,18 +1,18 @@
-const fs = require('fs');
+const fs = require("fs");
 const stdin = (
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : `3
 9
 2 1 4 3 5 6 2 7 2`
 )
   .trim()
-  .split('\n');
+  .split("\n");
 
 const solution = (stdin) => {
   let N = Number(stdin[0]);
   let cnt = Number(stdin[1]);
-  const recom = stdin[2].split(' ').map(Number);
+  const recom = stdin[2].split(" ").map(Number);
   const photo = [];
   const status = Array(101).fill(1001);
   recom.forEach((num) => {
@@ -21,8 +21,8 @@ const solution = (stdin) => {
       status[num] += 1;
     } else {
       // 넣어줌
-      // photo 가 꽉 안찼다면 그냥 넣어줌
       status[num] = 0;
+      // photo 가 꽉 안찼다면 그냥 넣어줌
       if (photo.length < N) {
         photo.push(num);
       } else {
@@ -38,12 +38,11 @@ const solution = (stdin) => {
         let del = photo.splice(index, 1);
         status[del[0]] = 1001;
         photo.push(num);
-        status[num] = 0;
       }
     }
   });
 
-  console.log(photo.sort().join(' '));
+  console.log(photo.sort().join(" "));
 };
 
 solution(stdin);
