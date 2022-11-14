@@ -18,6 +18,7 @@ const input = (
 
 const main = (input) => {
   // 톱니 바퀴의 12 시 방향 시작점
+  // 시계방향 회전 =>  point[num] -1  |  반시계 => point[num] + 1
   const point = [0, 0, 0, 0, 0];
 
   const t = [[0, 0, 0, 0, 0, 0, 0, 0]];
@@ -54,7 +55,7 @@ const main = (input) => {
         change_t(num + 1, -way, before);
       }
     }
-    point[num] = point[num] - way;
+    point[num] -= way;
   };
 
   for (let i = 0; i < way; i++) {
