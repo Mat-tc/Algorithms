@@ -2,5 +2,10 @@
   "prettier.semi": true,
   "files.associations": {
     "iostream": "cpp"
-  }
+  },
+  "files.exclude": {
+    "jihye": true,
+    "jiwoo": true
+  },
+  "files.eol": "\n"
 }
