@@ -1,7 +1,8 @@
-const fs = require('fs');
+const fs = require("fs");
+
 const input = (
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : `10001011
 10000011
 01011011
@@ -14,7 +15,7 @@ const input = (
 1 -1`
 )
   .trim()
-  .split('\n');
+  .split("\n");
 
 const main = (input) => {
   // 톱니 바퀴의 12 시 방향 시작점
@@ -23,9 +24,10 @@ const main = (input) => {
 
   const t = [[0, 0, 0, 0, 0, 0, 0, 0]];
   for (let i = 0; i < 4; i++) {
-    t.push(input[i].split('').map(Number));
+    t.push(input[i].split("").map(Number));
   }
 
+  // arr[-1] = arr[7]
   const way = Number(input[4]);
   input.splice(0, 5);
   const order = input;
@@ -34,7 +36,7 @@ const main = (input) => {
     if (num < 1 || num > 4) return;
     if (before.includes(num)) return;
 
-    //왼쪽 톱니바퀴 확인
+    //왼쪽 톱니바퀴 다른극인지 확인
     if (num != 1 && !before.includes(num - 1)) {
       if (point[num] - 2 < 3) point[num] += 8;
       if (point[num - 1] + 2 > 5) point[num - 1] -= 8;
@@ -45,7 +47,7 @@ const main = (input) => {
       }
     }
 
-    //오른쪽 톱니바퀴 확인
+    //오른쪽 톱니바퀴 다른극인지 확인
     if (num != 4 && !before.includes(num + 1)) {
       if (point[num] + 2 > 5) point[num] -= 8;
       if (point[num + 1] - 2 < 3) point[num + 1] += 8;
@@ -59,7 +61,7 @@ const main = (input) => {
   };
 
   for (let i = 0; i < way; i++) {
-    [num, d] = order[i].split(' ').map(Number);
+    [num, d] = order[i].split(" ").map(Number);
     change_t(num, d, []);
   }
 
