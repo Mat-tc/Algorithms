@@ -22,9 +22,15 @@ JS 내장 sort 함수는 merge sort로 구현이 되어있다. 그러므로 sort
 사람이 생각하는 정렬로 되지 않는 이유 ?? sort 내장 함수는 배열의 각 요소를 문자열로 변환헤 각 문자의 유니 코드 코드 포인트 값에 따라 정렬되기 때문 ! ! !
 
 ```javascript
+//오름차순
 const arr = [-2, -5, 3, 7, 2, 6];
 arr.sort((a, b) => {
   return a - b;
+});
+
+//내림차순
+arr.sort((a, b) => {
+  return b - a;
 });
 ```
 
