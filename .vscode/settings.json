@@ -4,7 +4,6 @@
     "iostream": "cpp"
   },
   "files.exclude": {
-    "jihye": true,
     "jiwoo": true
   },
   "files.eol": "\n"
