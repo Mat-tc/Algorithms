@@ -3,11 +3,9 @@
   "files.associations": {
     "iostream": "cpp"
   },
-<<<<<<< HEAD
   "files.exclude": {
-    "jiwoo": true
+    "jiwoo": true,
+    "jihye": true
   },
-=======
->>>>>>> 1190e89619d5dc6ab3cbf1ffa23646dff2293ae7
   "files.eol": "\n"
 }

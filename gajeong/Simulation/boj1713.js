@@ -1,18 +1,18 @@
-const fs = require("fs");
+const fs = require('fs');
 const stdin = (
-  process.platform === "linux"
-    ? fs.readFileSync("/dev/stdin").toString()
+  process.platform === 'linux'
+    ? fs.readFileSync('/dev/stdin').toString()
     : `2
 8
 1 2 3 1 3 4`
 )
   .trim()
-  .split("\n");
+  .split('\n');
 
 const solution = (stdin) => {
   let N = Number(stdin[0]);
   let cnt = Number(stdin[1]);
-  const recom = stdin[2].split(" ").map(Number);
+  const recom = stdin[2].split(' ').map(Number);
   const photo = [];
   const status = Array(101).fill(0);
   recom.forEach((num) => {
@@ -37,13 +37,13 @@ const solution = (stdin) => {
         }
         //splice의 용도를 잘 알아야 함   splice(시작인덱스,삭제할 개수)
         let del = photo.splice(index, 1);
-        status[del[0]] = 0;
+        status[del[0]] = 1001;
         photo.push(num);
       }
     }
   });
 
-  console.log(photo.sort().join(" "));
+  console.log(photo.sort().join(' '));
 };
 
 solution(stdin);
