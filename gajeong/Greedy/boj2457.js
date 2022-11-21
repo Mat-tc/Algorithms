@@ -1,5 +1,4 @@
 const fs = require('fs');
-const { start } = require('repl');
 const input = (
   process.platform === 'linux'
     ? fs.readFileSync('/dev/stdin').toString()
