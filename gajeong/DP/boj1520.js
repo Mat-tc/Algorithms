@@ -16,7 +16,7 @@ const input = (
 const main = (input) => {
   const [N, M] = input[0].split(' ').map(Number);
   const Map = [];
-  const visited = Array.from(Array(N), () => Array(M).fill(false));
+  const visited = Array.from(Array(N), () => Array(M).fill(-1));
   for (let i = 1; i <= N; i++) {
     Map.push(input[i].split(' ').map(Number));
   }
@@ -25,27 +25,20 @@ const main = (input) => {
   const dx = [0, 1, 0, -1];
   const dy = [-1, 0, 1, 0];
 
-  let count = 0;
-  //뒤에서부터 앞으로
-  const dfs = (x, y, val) => {
+  visited[0][0] = 1;
+  const DP = (x, y, val, way) => {
     if (x < 0 || y < 0 || x > M - 1 || y > N - 1) return;
-    if (Map[y][x] <= val) return;
-    if (visited[y][x]) return;
-    if (x == 0 && y == 0) {
-      count++;
-      return;
-    }
-
-    visited[y][x] = true;
-
+    if (Map[y][x] >= val && x != 0 && y != 0) return;
+    if (visited[y][x] === -1) visited[y][x] = way;
+    else visited[y][x] += way;
     for (let d = 0; d < 4; d++) {
-      dfs(x + dx[d], y + dy[d], Map[y][x]);
+      DP(x + dx[d], y + dy[d], Map[y][x], visited[y][x]);
     }
-    visited[y][x] = false;
   };
 
-  dfs(M - 1, N - 1, 0);
-  console.log(count);
+  DP(0, 0, Map[0][0], 1);
+
+  console.log(visited);
 };
 
 main(input);
