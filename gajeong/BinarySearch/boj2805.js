@@ -17,8 +17,10 @@ const solution = (input) => {
 
   let min = 0;
   let max = arr[arr.length - 1];
-
   let mid = 0;
+
+  // TTTFF 인 경우의 문제는 T에서 F로 전환하는 순간에 답이 있다는 것
+  // min + 1 < max를 통해 전환하는 순간 캐치  (좀 헷깔리지 ?)
   while (min + 1 < max) {
     mid = parseInt((min + max) / 2);
     let sum = 0;
