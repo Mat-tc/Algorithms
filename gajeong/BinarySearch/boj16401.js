@@ -2,8 +2,8 @@ const fs = require('fs');
 const input = (
   process.platform === 'linux'
     ? fs.readFileSync('/dev/stdin').toString()
-    : `4 3
-10 10 15`
+    : `3 10
+1 2 3 4 5 6 7 8 9 10`
 )
   .trim()
   .split('\n');
@@ -17,8 +17,10 @@ const solution = (input) => {
 
   let start = 1;
   let end = arr[N - 1];
-  while (start <= end) {
-    let mid = parseInt((start + end) / 2);
+  let mid = 0;
+
+  while (start + 1 < end) {
+    mid = parseInt((start + end) / 2);
     let cnt = 0;
 
     for (let i = 0; i < N; i++) {
@@ -26,10 +28,10 @@ const solution = (input) => {
       if (cnt > M) break;
     }
 
-    if (M <= cnt) start = mid + 1;
-    else end = mid - 1;
+    if (cnt >= M) start = mid;
+    else end = mid;
   }
-  console.log(end);
+  console.log(start);
 };
 
 solution(input);
