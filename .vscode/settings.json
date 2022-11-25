@@ -4,8 +4,16 @@
     "iostream": "cpp"
   },
   "files.exclude": {
-    "jiwoo": true,
-    "jihye": true
+    "jihye": true,
+    "jiwoo": true
   },
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "maven.excludedFolders": [
+    "**/.*",
+    "**/node_modules",
+    "**/target",
+    "**/bin",
+    "**/archetype-resources"
+  ],
+  "json.schemas": []
 }
