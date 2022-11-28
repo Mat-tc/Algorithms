@@ -10,6 +10,7 @@ function solution(n, k) {
     return answer;
 }
 
+//소수인지 판별
 const isPrime = (num) => {
     if (num < 2) return false;
     for (let i = 2; i * i <= num; i++) {
