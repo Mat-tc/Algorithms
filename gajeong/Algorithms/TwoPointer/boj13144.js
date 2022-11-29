@@ -3,7 +3,7 @@ const input = (
     process.platform === 'linux'
         ? fs.readFileSync('/dev/stdin').toString()
         : `5
-1 2 3 4 5`
+1 2 3 1 2`
 )
     .trim()
     .split('\n');
@@ -17,29 +17,18 @@ const main = (input) => {
     let end = start;
     let ans = 0;
 
-    //start가 갱신되면, end 도 start값과 함께 갱신된다.
     while (start < N) {
-        //end가 N에 도달하면, (전체원소) start++와 end 갱신
-        if (end === N) {
-            for (let i = start; i <= end; i++) {
+        if (st[input[end]] === true || end === N) {
+            for (let i = 1; i < end - start + 1; i++) {
+                ans += i;
+            }
+            for (let i = start; i < end; i++) {
                 st[input[i]] = false;
             }
-            start++;
-            end = start;
-            continue;
-        }
-        if (st[input[end]] == false) {
-            ans++;
-            st[input[end]] = true;
-            end++;
+            start = end;
         } else {
-            //연속된 수열로 만들 수 없다면, start ++, end 갱신
-            st[input[start]] = false;
-            for (let i = start; i <= end; i++) {
-                st[input[i]] = false;
-            }
-            start++;
-            end = start;
+            st[input[end]] = false;
+            end++;
         }
     }
 
