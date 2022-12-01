@@ -1,16 +1,21 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
         : `3
 4
 7
 10`
 )
     .trim()
-    .split('\n');
+    .split("\n");
 
 /*
+f(1) = 1 
+f(2) = 1 + 1  ||  2 
+f(3) = f(1) + 2 | | f(2) + 1 
+f(4) = f(1) + 3    ||  f(2)+2   ||  f(3)+ 1  
+
  */
 const main = (input) => {
     const cnt = Number(input.shift());
@@ -27,7 +32,7 @@ const main = (input) => {
     for (let i = 0; i < cnt; i++) {
         ans.push(branch[numbers[i]]);
     }
-    console.log(ans.join('\n'));
+    console.log(ans.join("\n"));
 };
 
 main(input);

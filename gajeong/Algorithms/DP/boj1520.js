@@ -1,24 +1,21 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
-        : `4 5
-50 45 37 32 30
-35 50 40 20 25
-30 30 25 17 28
-27 24 22 15 10`
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
+        : `1 1 
+1`
 )
     .trim()
-    .split('\n');
+    .split("\n");
 
 /*
  */
 const main = (input) => {
-    const [N, M] = input[0].split(' ').map(Number);
+    const [N, M] = input[0].split(" ").map(Number);
     const Map = [];
     const visited = Array.from(Array(N), () => Array(M).fill(-1));
     for (let i = 1; i <= N; i++) {
-        Map.push(input[i].split(' ').map(Number));
+        Map.push(input[i].split(" ").map(Number));
     }
 
     const stack = [[0, 0]];

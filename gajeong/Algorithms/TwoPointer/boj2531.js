@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
         : `8 30 4 30
 7
 9
@@ -13,10 +13,10 @@ const input = (
 25`
 )
     .trim()
-    .split('\n');
+    .split("\n");
 
 const main = (input) => {
-    const [N, d, k, c] = input.shift().split(' ').map(Number);
+    const [N, d, k, c] = input.shift().split(" ").map(Number);
     const arr = input.map(Number);
 
     let start = 0;
@@ -36,7 +36,7 @@ const main = (input) => {
         }
         //영역2.
         else {
-            p = [...arr.slice(start, N), arr.slice(0, N)];
+            p = [...arr.slice(start, N), ...arr.slice(0, N)];
         }
         //set함수 활용해서 하도록
         if (p.includes(c)) cnt = [...new Set(arr.slice(start, end + 1))].length;
