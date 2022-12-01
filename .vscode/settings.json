@@ -1,20 +1,19 @@
 {
-  "prettier.semi": true,
-  "files.associations": {
-    "iostream": "cpp"
-  },
-  "files.exclude": {
-    "jihye": true,
-    "jiwoo": true
-  },
-  "files.eol": "\n",
-  "maven.excludedFolders": [
-    "**/.*",
-    "**/node_modules",
-    "**/target",
-    "**/bin",
-    "**/archetype-resources"
-  ],
-  "json.schemas": [],
-  "prettier.tabWidth": 4
+    "prettier.semi": true,
+    "files.associations": {
+        "iostream": "cpp"
+    },
+    "files.exclude": {
+        "jihye": true
+    },
+    "files.eol": "\n",
+    "maven.excludedFolders": [
+        "**/.*",
+        "**/node_modules",
+        "**/target",
+        "**/bin",
+        "**/archetype-resources"
+    ],
+    "json.schemas": [],
+    "prettier.tabWidth": 4
 }

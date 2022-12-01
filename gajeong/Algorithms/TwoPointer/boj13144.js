@@ -2,8 +2,8 @@ const fs = require('fs');
 const input = (
     process.platform === 'linux'
         ? fs.readFileSync('/dev/stdin').toString()
-        : `5
-1 2 3 1 2`
+        : `6
+1 2 3 1 2 2`
 )
     .trim()
     .split('\n');
@@ -18,17 +18,18 @@ const main = (input) => {
     let ans = 0;
 
     while (start < N) {
-        if (st[input[end]] === true || end === N) {
-            for (let i = 1; i < end - start + 1; i++) {
-                ans += i;
-            }
-            for (let i = start; i < end; i++) {
-                st[input[i]] = false;
-            }
-            start = end;
+        if (end === N) {
+            ans += end - start;
+            start++;
+            continue;
+        }
+        if (st[input[end]] === false) {
+            st[input[end]] = true;
+            if (end < N) end++;
         } else {
-            st[input[end]] = false;
-            end++;
+            ans += end - start;
+            st[input[start]] = false;
+            start++;
         }
     }
 
