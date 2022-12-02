@@ -27,7 +27,7 @@ const main = (input) => {
             st[input[end]] = true;
             if (end < N) end++;
         } else {
-            ans += end - start;
+            ans += end - start; ``
             st[input[start]] = false;
             start++;
         }
