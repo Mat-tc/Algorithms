@@ -31,16 +31,15 @@ const main = (input) => {
             }
         }
         let keys = Object.keys(clothes);
-        let arr = [];
+        let number = 1;
         for (let i = 0; i < keys.length; i++) {
-            arr.push(clothes[keys[i]].length);
+            number *= clothes[keys[i]].length + 1;
         }
-
-        //모든 경우의 수 계산해야하는데. .  방법이 떠오르지 않는다.
+        ans.push(number - 1);
 
         idx += cnt + 1;
-        console.log(clothes);
     }
+    console.log(ans.join('\n'));
 };
 
 main(input);
