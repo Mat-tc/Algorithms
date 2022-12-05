@@ -13,33 +13,28 @@ cab`
     .trim()
     .split('\n');
 
-const main = (input) => {
-    const [M, N, K] = input.shift().split(' ').map(Number);
-    const map = {};
-    const answer = [];
+const [M, N, K] = input.shift().split(' ').map(Number);
 
+const map = [];
+for (let i = 0; i < M; i++) {
+    map.push(input[i].split(''));
+}
+
+const answer = [];
+
+//비교해야할 문자, 지금 좌표 위치
+const dfs = (str, x, y) => {
+    let queue = [];
     const dx = [0, 1, 1, 1, 0, -1, -1, -1];
     const dy = [-1, -1, 0, 1, 1, 1, 0, -1];
-
-    //문자마다 좌표 위치 배열 객체 만듬
-    for (let j = 0; j < M; j++) {
-        for (let i = 0; i < N; i++) {
-            if (map[input[j][i]]) map[input[j][i]].push([i, j]);
-            else map[input[j][i]] = [[i, j]];
-        }
+    let arr = map[str];
+    for (let d = 0; i < 8; d++) {
+        let to_x = x + dx[d];
+        let to_y = y + dy[d];
+        if (to_x < 0) to_x = N - 1;
+        if (to_x > N - 1) to_x = 0;
+        if (to_y < 0) to_y = M - 1;
+        if (to_y > M - 1) to_y = 0;
     }
-
-    //경우의 수 count
-    for (let c = M + 1; c <= M + K + 1; c++) {
-        let cnt = 0;
-        for (let y = 0; y < M; y++) {
-            for (let x = 0; x < N; x++) {
-                check(x);
-            }
-        }
-    }
-
-    const check = () => {};
+    return queue;
 };
-
-main(input);
