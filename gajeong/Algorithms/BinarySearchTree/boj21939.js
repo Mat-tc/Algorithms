@@ -50,9 +50,9 @@ const main = (input) => {
         let lv = Q[num];
         let p = LV[lv];
         let res = p.filter((e) => e != num);
-        if (res.length === 0) delete LV.lv;
+        if (res.length === 0) delete LV[lv];
         else LV[lv] = res;
-        delete Q.num;
+        delete Q[num];
     };
 
     const N = Number(input[0]);
