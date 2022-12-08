@@ -5,7 +5,6 @@ const input = (
         : `5
 1000 1
 1001 2
-1002 1
 19998 78
 2667 37
 2042 55
@@ -48,8 +47,6 @@ const main = (input) => {
         insert(num, level);
     }
 
-    console.log(Q, LV);
-
     let answer = [];
     //명령어 처리
     const M = Number(input[N + 1]);
@@ -60,8 +57,15 @@ const main = (input) => {
             case "recommend":
                 let way = od[1];
                 if (way === "1") {
-                    let high_level = Math.max(...Object.keys(LV));
-                    answer.push(Math.max(...LV[high_level]));
+                    let res = -1;
+                    while (true) {
+                        let high_level = Math.max(...Object.keys(LV));
+                        res = Math.max(...LV[high_level]);
+                        if (res == -1) {
+                            delete LV[high_level];
+                        } else break;
+                    }
+                    answer.push(res);
                 } else {
                     let res = -1;
                     while (true) {
@@ -81,7 +85,7 @@ const main = (input) => {
                 insert(num, level);
                 break;
             case "solved":
-                del(od[1]);
+                solved(od[1]);
                 break;
         }
     }
