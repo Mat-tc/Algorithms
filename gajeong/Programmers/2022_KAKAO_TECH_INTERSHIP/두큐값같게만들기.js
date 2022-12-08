@@ -7,6 +7,7 @@ function solution(queue1, queue2) {
     let N = queue1.length;
     let q1 = 0;
     let q2 = 0;
+
     while (q1 < 2 * N - 2 && q2 < 2 * N - 2) {
         if (sum1 === sum2) break;
         if (sum1 > sum2) {
