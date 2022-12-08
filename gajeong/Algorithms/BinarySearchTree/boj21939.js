@@ -28,32 +28,17 @@ const main = (input) => {
     const LV = {};
 
     const insert = (num, level) => {
-        if (Q[num]) {
-            let before_level = Q[num];
-            let before_arr = LV[before_level];
-            //이전 레벨에서 해당 문제 번호 삭제
-            let res = before_arr.filter((e) => e != num);
-            if (res.length === 0) {
-                delete LV.before_level;
-            } else LV[before_level] = res;
+        if (LV[level]) LV[level].push(num);
+        else LV[level] = [num];
 
-            //새 레벨에 해당 문제 삽입
-            if (LV[level]) LV[level].push(num);
-            else LV[level] = [num];
-        } else {
-            if (LV[level]) LV[level].push(num);
-            else LV[level] = [num];
-        }
-        Q[num] = level;
+        Q[num] = [level, LV[level].length - 1];
     };
 
-    const del = (num) => {
-        let lv = Q[num];
-        let p = LV[lv];
-        let res = p.filter((e) => e != num);
-        if (res.length === 0) delete LV.lv;
-        else LV[lv] = res;
-        delete Q.num;
+    const solved = (num) => {
+        let [lv, idx] = Q[num];
+        LV[lv][idx] = -1;
+
+        delete Q[num];
     };
 
     const N = Number(input[0]);
@@ -78,8 +63,16 @@ const main = (input) => {
                     let high_level = Math.max(...Object.keys(LV));
                     answer.push(Math.max(...LV[high_level]));
                 } else {
-                    let low_level = Math.min(...Object.keys(LV));
-                    answer.push(Math.min(...LV[low_level]));
+                    let res = -1;
+                    while (true) {
+                        let low_level = Math.min(...Object.keys(LV));
+                        let arr = LV[low_level].filter((el) => el > -1);
+                        res = Math.min(...arr);
+                        if (res == -1 || res == Infinity) {
+                            delete LV[low_level];
+                        } else break;
+                    }
+                    answer.push(res);
                 }
                 break;
             case "add":
