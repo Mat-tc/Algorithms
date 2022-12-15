@@ -1,32 +1,48 @@
 function solution(arrayA, arrayB) {
     var answer = 0;
-    arrayA.sort();
-    arrayB.sort();
-    let min = Math.min(arrayA[0], arrayB[0]);
-    for (let i = 2; i <= min; i++) {
-        if (arrayA[i] % min === 0) {
-        } else {
+    const length = arrayA.length;
+    //A배열이 모두 나누어지는 경우
+    let minA = Math.min(...arrayA);
+    const divA = divide(minA);
+    let st = true;
+
+    for (let i = 0; i < divA.length; i++) {
+        let num = divA[i];
+        st = true;
+        for (let idx = 0; idx < length; idx++) {
+            if (arrayA[idx] % num != 0 || arrayB[idx] % num == 0) {
+                st = false;
+                break;
+            }
         }
+        st == true && num > answer ? (answer = num) : "";
     }
 
-    const checkA = () => {
-        for (let i = 0; i < arrayA.length; i++) {
-            if (arrayA[i] % min !== 0) {
-                return false;
-            }
-        }
-        return true;
-    };
+    //B배열이 모두 나누어지는 경우
+    let minB = Math.min(...arrayB);
+    const divB = divide(minB);
 
-    const checkB = () => {
-        for (let i = 0; i < arrayA.length; i++) {
-            if (arrayB[i] % min !== 0) {
-                return false;
+    for (let i = 0; i < divB.length; i++) {
+        let num = divB[i];
+        st = true;
+        for (let idx = 0; idx < length; idx++) {
+            if (arrayB[idx] % num != 0 || arrayA[idx] % num == 0) {
+                st = false;
+                break;
             }
         }
-        return true;
-    };
+        st == true && num > answer ? (answer = num) : "";
+    }
+
     return answer;
 }
 
-solution([10, 17], [5, 20]);
+function divide(num) {
+    let el = [];
+    for (let i = 1; i <= num; i++) {
+        if (num % i === 0) el.push(i);
+    }
+    return el;
+}
+
+console.log(solution([10], [10]));
