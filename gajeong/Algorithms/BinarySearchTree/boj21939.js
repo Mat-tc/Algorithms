@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
         : `5
 1000 1
 1001 2
@@ -19,7 +19,7 @@ solved 1001
 recommend -1`
 )
     .trim()
-    .split('\n');
+    .split("\n");
 
 const main = (input) => {
     // key : 문제번호, value : 문제 난이도
@@ -43,7 +43,7 @@ const main = (input) => {
     const N = Number(input[0]);
     //입력처리
     for (let i = 1; i <= N; i++) {
-        let [num, level] = input[i].split(' ');
+        let [num, level] = input[i].split(" ");
         insert(num, level);
     }
 
@@ -51,12 +51,12 @@ const main = (input) => {
     //명령어 처리
     const M = Number(input[N + 1]);
     for (let i = 2 + N; i <= 1 + N + M; i++) {
-        let od = input[i].split(' ');
+        let od = input[i].split(" ");
         let order = od[0];
         switch (order) {
-            case 'recommend':
+            case "recommend":
                 let way = od[1];
-                if (way === '1') {
+                if (way === "1") {
                     let res = -1;
                     while (true) {
                         let high_level = Math.max(...Object.keys(LV));
@@ -79,18 +79,18 @@ const main = (input) => {
                     answer.push(res);
                 }
                 break;
-            case 'add':
+            case "add":
                 let num = od[1];
                 let level = od[2];
                 insert(num, level);
                 break;
-            case 'solved':
+            case "solved":
                 solved(od[1]);
                 break;
         }
     }
 
-    console.log(answer.join('\n'));
+    console.log(answer.join("\n"));
 };
 
 main(input);

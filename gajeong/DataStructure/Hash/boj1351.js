@@ -1,20 +1,18 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
-        : `256 2 4`
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
+        : `213242321423231424 2 4`
 )
     .trim()
-    .split('\n');
+    .split("\n");
 
 const main = (input) => {
-    const [N, P, Q] = input[0].split(' ').map(Number);
-    const cnt = {};
+    const [N, P, Q] = input[0].split(" ").map(Number);
+    const cnt = { 0: 1 };
 
     const recursion = (num) => {
-        if (num < 1) {
-            return 1;
-        } else if (cnt[num]) {
+        if (cnt[num]) {
             return cnt[num];
         }
         cnt[num] = recursion(parseInt(num / P)) + recursion(parseInt(num / Q));
