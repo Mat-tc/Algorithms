@@ -1,20 +1,25 @@
-const rl = require('readline').createInterface({ input: process.stdin });
-const arr = [];
+const fs = require('fs');
+let input =
+    process.platform === 'linux'
+        ? fs.readFileSync('/dev/stdin').toString()
+        : fs
+              .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+              .toString()
+              .trim()
+              .split('\n');
 
-rl.on('line', (l) => {
-    arr.push(l);
-}).on('close', () => {
-    solution(arr);
-});
+solution(input);
 
 function solution(input) {
     const [N, R, Q] = input[0].split(' ').map(Number);
-    const node = Array.from({ length: N + 1 }, () => []);
+    const node = [];
     const P = Array(N + 1).fill(-1);
 
     //1 . 연결리스트로 만들기
     for (let i = 1; i <= N - 1; i++) {
         let [n1, n2] = input[i].split(' ').map(Number);
+        if (!node[n1]) node[[n1]] = [];
+        if (!node[n2]) node[[n2]] = [];
         node[n1].push(n2);
         node[n2].push(n1);
     }
@@ -23,7 +28,6 @@ function solution(input) {
     P[R] = 0;
     let queue = [R];
     let start = 0;
-
     while (start < queue.length) {
         let parent = queue[start];
         let child = node[parent];
@@ -50,7 +54,7 @@ function solution(input) {
             }
             s++;
         }
-        answer.push(arr.length);
+        answer.push(s);
     }
 
     console.log(answer.join('\n'));
