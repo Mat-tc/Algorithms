@@ -1,23 +1,23 @@
-const fs = require('fs');
+const fs = require("fs");
 let input =
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
+    process.platform === "linux"
+        ? fs.readFileSync("/dev/stdin").toString()
         : fs
-              .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+              .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
               .toString()
               .trim()
-              .split('\n');
+              .split("\n");
 
 solution(input);
 
 function solution(input) {
-    const [N, R, Q] = input[0].split(' ').map(Number);
+    const [N, R, Q] = input[0].split(" ").map(Number);
     const node = [];
     const P = Array(N + 1).fill(-1);
 
     //1 . 연결리스트로 만들기
     for (let i = 1; i <= N - 1; i++) {
-        let [n1, n2] = input[i].split(' ').map(Number);
+        let [n1, n2] = input[i].split(" ").map(Number);
         if (!node[n1]) node[[n1]] = [];
         if (!node[n2]) node[[n2]] = [];
         node[n1].push(n2);
@@ -36,6 +36,7 @@ function solution(input) {
             P[child[i]] = parent;
             queue.push(child[i]);
         }
+        node[parent] = null;
         start++;
     }
 
@@ -57,5 +58,5 @@ function solution(input) {
         answer.push(s);
     }
 
-    console.log(answer.join('\n'));
+    console.log(answer.join("\n"));
 }
