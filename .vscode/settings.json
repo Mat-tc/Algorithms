@@ -15,6 +15,6 @@
         "**/archetype-resources"
     ],
     "json.schemas": [],
-    "prettier.tabWidth": 4,
+    "prettier.tabWidth": 2,
     "editor.tabSize": 4
 }
