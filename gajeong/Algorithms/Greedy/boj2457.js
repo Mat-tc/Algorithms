@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-const fs = require('fs');
-=======
+
 const fs = require("fs");
->>>>>>> 420df707a811d7b0d52bb3f8ec0f1a634d53ca4a
 const input = (
   process.platform === "linux"
     ? fs.readFileSync("/dev/stdin").toString()
