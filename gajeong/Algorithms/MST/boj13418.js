@@ -59,6 +59,4 @@ function solution(input) {
   }
 
   console.log(max ** 2 - min ** 2);
-
-  //오른 ? 내리 ? 정렬하기
 }
