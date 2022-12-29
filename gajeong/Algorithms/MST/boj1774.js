@@ -67,5 +67,7 @@ function solution(input) {
     unionParent(a, b);
     answer += d;
   }
+
+  answer *= 100;
   console.log(answer.toFixed(2));
 }
