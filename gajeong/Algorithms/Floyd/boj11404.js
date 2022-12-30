@@ -19,7 +19,7 @@ function solution(input) {
 
   for (let i = 1; i <= n; i++) {
     for (j = 1; j <= n; j++) {
-      if (i == j) continue;
+      if (i == j) map[i][i] = 0;
     }
   }
 
