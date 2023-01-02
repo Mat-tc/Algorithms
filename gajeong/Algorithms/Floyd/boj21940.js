@@ -11,7 +11,7 @@ solution(input);
 
 function solution(input) {
   const [N, M] = input[0].split(" ").map(Number);
-  const max = 1000 * N;
+  const max = 1000 * N + 1;
   const map = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
 
   for (let i = 1; i <= N; i++) {
@@ -43,8 +43,9 @@ function solution(input) {
     let d = 0;
     for (let i = 0; i < friends.length; i++) {
       if (map[place][friends[i]] + map[friends[i]][place] > d)
-        dist[place] = map[place][friends[i]] + map[friends[i]][place];
+        d = map[place][friends[i]] + map[friends[i]][place];
     }
+    dist[place] = d;
   }
 
   let point = Math.min(...dist.slice(1, N + 1));
