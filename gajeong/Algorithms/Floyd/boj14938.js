@@ -35,13 +35,13 @@ function solution(input) {
         if (middle == start || start == end || end == middle) continue;
         map[start][end] = Math.min(
           map[start][end],
-          map[start][middle] + map[m입ddle][end]
+          map[start][middle] + map[middle][end]
         );
       }
     }
   }
 
-  //정답 출력
+  //정답
   for (let i = 1; i <= n; i++) {
     for (let j = 1; j <= n; j++) {
       if (map[i][j] <= m) answer[i] += items[j];
