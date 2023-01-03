@@ -1,77 +1,105 @@
 const fs = require('fs');
 let input =
-    process.platform === 'linux'
-        ? fs.readFileSync('/dev/stdin').toString()
-        : fs
-              .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
-              .toString()
-              .trim()
-              .split('\n');
+  process.platform === 'linux'
+    ? fs.readFileSync('/dev/stdin').toString()
+    : fs
+        .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+        .toString()
+        .trim()
+        .split('\n');
 
-const N = Number(input.shift());
-input = input.map(Number);
-const Heap = Array(100000).fill(0);
-let idx = 1;
+solution(input);
 
-const ans = [];
-for (let i = 0; i < N; i++) {
-    if (input[i] === 0) {
-        ans.push(Heap[1]);
-        if (idx > 1) del();
-    } else {
-        insert(input[i]);
+function solution(input) {
+  class Node {
+    // value 외에도 priority 클래스를 함께 담기 위해 Node 클래스를 사용한다.
+    constructor(val) {
+      this.val = val;
     }
-}
+  }
 
-function insert(num) {
-    Heap[idx] = num;
-    //인덱스 오름차순(역) 정렬
-    sort(-1);
-    idx++;
-}
+  class PriorityQueue {
+    constructor() {
+      this.values = [];
+    }
 
-function sort(way) {
-    //마지막인덱스에 원소가 삽입되어, 삽입된 원소가 부모보다 작은지 확인
-    if (way == -1) {
-        let pIdx = parseInt(idx / 2);
-        let cIdx = idx;
-        while (pIdx > 0 && Heap[cIdx] < Heap[pIdx]) {
-            let p = Heap[pIdx];
-            Heap[pIdx] = Heap[cIdx];
-            Heap[cIdx] = p;
+    enqueue(val) {
+      // 이진 힙에서 만든 Insert 메서드에서 이름을 바꿨다.
+      const newNode = new Node(val);
+      this.values.push(newNode);
+      this.bubbleUp();
+    }
 
-            cIdx = pIdx;
-            pIdx = parseInt(pIdx / 2);
+    bubbleUp() {
+      let idx = this.values.length - 1;
+      while (idx > 0) {
+        const parentIdx = Math.floor((idx - 1) / 2);
+        if (this.values[idx].val < this.values[parentIdx].val) break;
+        [this.values[idx], this.values[parentIdx]] = [
+          this.values[parentIdx],
+          this.values[idx],
+        ];
+        idx = parentIdx;
+      }
+    }
+
+    dequeue() {
+      // 이진 힙에서 만든 extractMax 메서드에서 이름을 바꿨다.
+      const min = this.values[0];
+      const end = this.values.pop();
+      if (this.values.length > 0) {
+        this.values[0] = end;
+        this.sinkDown();
+      }
+      return min;
+    }
+
+    sinkDown() {
+      let idx = 0;
+      const length = this.values.length;
+      const element = this.values[0];
+      while (true) {
+        const leftChildIdx = 2 * idx + 1;
+        const rightChildIdx = 2 * idx + 2;
+        let leftChild;
+        let rightChild;
+        let swap = null;
+
+        if (leftChildIdx > length) {
+          leftChild = this.values[leftChildIdx];
+          // 최소이진힙이라 최대이진힙과 달리 부등호 방향이 반대고, 비교하는 값은 priority 프로퍼티다.
+          if (leftChild.val < element.val) {
+            swap = leftChildIdx;
+          }
         }
-    } else {
-        let p = 1;
-        while (
-            p < parseInt(idx / 2) &&
-            (Heap[p] > Heap[2 * p] || Heap[p] > Heap[2 * p + 1])
-        ) {
-            if (Heap[2 * p] <= Heap[2 * p + 1]) {
-                let v = Heap[2 * p];
-                Heap[2 * p] = Heap[p];
-                Heap[p] = v;
-                p = 2 * p;
-            } else {
-                let v = Heap[2 * p + 1];
-                Heap[2 * p + 1] = Heap[p];
-                Heap[p] = v;
-                p = 2 * p + 1;
-            }
+        if (rightChildIdx > length) {
+          rightChild = this.values[rightChildIdx];
+          if (
+            (swap === null && rightChild.val > element.val) ||
+            (swap !== null && rightChild.val > leftChild.val)
+          ) {
+            swap = rightChildIdx;
+          }
         }
+        if (swap === null) break;
+        this.values[idx] = this.values[swap];
+        this.values[swap] = element;
+        idx = swap;
+      }
     }
-}
+  }
 
-function del() {
-    if (Heap[1] != 0) {
-        Heap[1] = Heap[idx - 1];
-        Heap[idx - 1] = 0;
-        idx--;
-        //인덱스 오름차순 정렬
-        sort(1);
+  const N = Number(input[0]);
+  const pq = new PriorityQueue();
+  const answer = [];
+  for (let i = 1; i <= N; i++) {
+    let num = Number(input[i]);
+    if (num == 0) {
+      if (pq.values.length == 0) answer.push(0);
+      else answer.push(pq.values.pop().val);
+    } else {
+      pq.enqueue(num);
     }
+  }
+  console.log(answer);
 }
-
-console.log(ans.join('\n'));
