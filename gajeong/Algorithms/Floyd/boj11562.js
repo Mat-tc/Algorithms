@@ -1,21 +1,21 @@
-const fs = require('fs');
+const fs = require("fs");
 let input =
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : fs
-        .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+        .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
         .toString()
         .trim()
-        .split('\r\n');
+        .split("\r\n");
 
 solution(input);
 
 function solution(input) {
-  const [n, m] = input[0].split(' ').map(Number);
+  const [n, m] = input[0].split(" ").map(Number);
   const map = Array.from(Array(n + 1), () => Array(n + 1).fill(30001));
 
   for (let i = 1; i <= m; i++) {
-    let [start, end, way] = input[i].split(' ').map(Number);
+    let [start, end, way] = input[i].split(" ").map(Number);
     //양 방향일때 비용  0
     if (way == 1) {
       map[end][start] = 0;
@@ -48,8 +48,8 @@ function solution(input) {
   const order = Number(input[1 + m]);
 
   for (let i = 2 + m; i < 2 + m + order; i++) {
-    let [start, end] = input[i].split(' ').map(Number);
+    let [start, end] = input[i].split(" ").map(Number);
     answer.push(map[start][end]);
   }
-  console.log(answer.join('\n'));
+  console.log(answer.join("\n"));
 }

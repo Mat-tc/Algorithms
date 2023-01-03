@@ -1,24 +1,24 @@
-const fs = require('fs');
+const fs = require("fs");
 let input =
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : fs
-        .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+        .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
         .toString()
         .trim()
-        .split('\r\n');
+        .split("\r\n");
 solution(input);
 
 function solution(input) {
-  const [N, M] = input[0].split(' ').map(Number);
-  const max = 1000 * N;
+  const [N, M] = input[0].split(" ").map(Number);
+  const max = 1000 * N + 1;
   const map = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
 
   for (let i = 1; i <= N; i++) {
     map[i][i] = 0;
   }
   for (let i = 1; i <= M; i++) {
-    let [start, end, cost] = input[i].split(' ').map(Number);
+    let [start, end, cost] = input[i].split(" ").map(Number);
     map[start][end] = cost;
   }
 
@@ -35,26 +35,17 @@ function solution(input) {
     }
   }
 
-  const distance = Array(N + 1).fill(0);
-
-  for (let place = 1; place <= N; place++) {
-    for (let start = 1; start <= N; start++) {
-      if (place == start) continue;
-      let d = map[start][place] + map[place][start];
-      if (distance[place] < d) distance[place] = d;
-    }
-  }
-
   // 친구의 위치로부터, 가장 거리가 짧은 지점을 구하는건데,.. .. . ㅠㅜㅜ
 
-  const friends = input[input.length - 1].split(' ').map(Number);
+  const friends = input[input.length - 1].split(" ").map(Number);
   const dist = [0];
   for (let place = 1; place <= N; place++) {
     let d = 0;
     for (let i = 0; i < friends.length; i++) {
       if (map[place][friends[i]] + map[friends[i]][place] > d)
-        dist[place] = map[place][friends[i]] + map[friends[i]][place];
+        d = map[place][friends[i]] + map[friends[i]][place];
     }
+    dist[place] = d;
   }
 
   let point = Math.min(...dist.slice(1, N + 1));
@@ -64,5 +55,5 @@ function solution(input) {
     if (dist[i] == point) answer.push(i);
   }
 
-  console.log(answer.join(' '));
+  console.log(answer.join(" "));
 }
