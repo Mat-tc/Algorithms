@@ -1,5 +1,5 @@
 //최소 이집 힙 : 부모 노드가 항상 자식 노드들 보다 작은 경우
-class MaxBinaryHeap {
+class MinBinaryHeap {
   constructor() {
     this.values = [];
   }
@@ -7,7 +7,7 @@ class MaxBinaryHeap {
   insert(element) {
     this.values.push(element);
     this.bubbleUp();
-  }
+  } 88,572
 
   bubbleUp() {
     let idx = this.values.length - 1;
@@ -70,6 +70,3 @@ class MaxBinaryHeap {
 
 let heap = new MaxBinaryHeap();
 
-heap.insert(2);
-heap.insert(1);
-console.log(heap);
