@@ -7,7 +7,7 @@ class MinBinaryHeap {
   insert(element) {
     this.values.push(element);
     this.bubbleUp();
-  } 88,572
+  }
 
   bubbleUp() {
     let idx = this.values.length - 1;
@@ -69,4 +69,3 @@ class MinBinaryHeap {
 }
 
 let heap = new MaxBinaryHeap();
-
