@@ -35,6 +35,5 @@ function solution(input) {
     dist.push(map[X][i] + map[i][X]);
   }
 
-  console.log(dist);
   console.log(Math.max(...dist));
 }
