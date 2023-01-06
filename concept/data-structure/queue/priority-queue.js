@@ -78,6 +78,6 @@ class PriorityQueue {
 }
 
 let node = new PriorityQueue();
-node.enqueue(2, 0);
+node.enqueue(2, 3);
 node.enqueue(1, 0);
 console.log(node.values);
