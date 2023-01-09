@@ -1,9 +1,9 @@
-const fs = require('fs');
+const fs = require("fs");
 let input = fs
-  .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+  .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
   .toString()
   .trim()
-  .split('\r\n');
+  .split("\r\n");
 solution(input);
 
 function solution(input) {
@@ -85,42 +85,62 @@ function solution(input) {
       }
     }
   }
-  const [N, M, X] = input[0].split(' ').map(Number);
+  const [N, M, X] = input[0].split(" ").map(Number);
   const max = 100 * N;
-  const map = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
-
+  const map1 = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
+  const map2 = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
   for (let i = 1; i <= M; i++) {
-    let [start, end, cost] = input[i].split(' ').map(Number);
-    map[start][end] = cost;
+    let [start, end, cost] = input[i].split(" ").map(Number);
+    map1[start][end] = cost;
+    map2[end][start] = cost;
   }
 
   for (let i = 1; i <= N; i++) {
-    map[i][i] = 0;
+    map1[i][i] = 0;
+    map2[i][i] = 0;
   }
 
-  for (let i = 1; i <= N; i++) {
-    let heap = new PriorityQueue();
-    heap.enqueue([0, i], 0);
-    let visited = Array(N + 1).fill(-1);
-    visited[0] = 0;
-    while (heap.values.length) {
-      let item = heap.dequeue();
+  let heap = new PriorityQueue();
+  heap.enqueue([0, X], 0);
+  let visited = Array(N + 1).fill(-1);
+  visited[0] = 0;
+  while (heap.values.length) {
+    let item = heap.dequeue();
 
-      let [start, end] = item.val;
-      let cost = item.priority;
-      if (visited[end] > -1 && visited[end] < cost) continue;
-      for (let k = 1; k <= N; k++) {
-        if (map[end][k] > 0 && map[end][k] < max && visited[k] == -1) {
-          heap.enqueue([end, k], map[end][k] + visited[start]);
-        }
+    let [start, end] = item.val;
+    let cost = item.priority;
+    if (visited[end] > -1 && visited[end] < cost) continue;
+    for (let k = 1; k <= N; k++) {
+      if (map1[end][k] > 0 && visited[k] == -1 && map1[end][k] < max) {
+        heap.enqueue([end, k], map1[end][k] + visited[start]);
       }
-      visited[end] = visited[start] + cost;
-      map[i][end] = visited[start] + cost;
     }
+    visited[end] = visited[start] + cost;
   }
-  const answer = [];
+
+  let heap2 = new PriorityQueue();
+  heap2.enqueue([0, X], 0);
+  let visited2 = Array(N + 1).fill(-1);
+  visited2[0] = 0;
+  while (heap2.values.length) {
+    let item2 = heap2.dequeue();
+
+    let [start, end] = item2.val;
+    let cost = item2.priority;
+    if (visited2[end] > -1 && visited2[end] < cost) continue;
+    for (let k = 1; k <= N; k++) {
+      if (map2[end][k] > 0 && visited2[k] == -1 && map2[end][k] < max) {
+        heap2.enqueue([end, k], map2[end][k] + visited2[start]);
+      }
+    }
+    visited[end] = visited[start] + cost;
+  }
+
+  const answer1 = [];
+  const answer2 = [];
+  const res = [];
   for (let i = 1; i <= N; i++) {
-    answer.push(map[i][X] + map[X][i]);
+    res.push(answer1[i] + answer2[i]);
   }
-  console.log(Math.max(...answer));
+  console.log(Math.max(...res));
 }
