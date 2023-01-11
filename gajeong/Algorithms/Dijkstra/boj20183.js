@@ -1,9 +1,9 @@
-const fs = require('fs');
+const fs = require("fs");
 let input = fs
-  .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+  .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
   .toString()
   .trim()
-  .split('\r\n');
+  .split("\r\n");
 solution(input);
 function solution(input) {
   class Node {
@@ -86,12 +86,33 @@ function solution(input) {
   }
 
   //교차로 개수 N, 골목 개수 M, 시작 교차로 번호 A, 도착 교차로 번호 B, 가진 돈 C
-  const [N, M, A, B, C] = input[0].split(' ').map(Number);
+  const [N, M, A, B, C] = input[0].split(" ").map(Number);
   const max = 5e10;
-  const map = Array.from(Array(N + 1), () => Array(N + 1).fill(max));
+
+  const linked = Array.from(Array(N + 1), () => []);
   for (let i = 1; i <= M; i++) {
-    let [start, end, cost] = input[i].split(' ').map(Number);
-    map[start][end] = cost;
-    map[end][start] = cost;
+    let [start, end, cost] = input[i].split(" ").map(Number);
+    linked[start].push([end, cost]);
+    linked[end].push([start, cost]);
   }
+
+  const stack = [[1, 0]];
+  const visited = Array(N + 1).fill(false);
+  visited[1] = true;
+  let sum = 0;
+  let shy = 0;
+  while (stack.length) {
+    let [point, cost] = stack.pop();
+
+    sum += cost;
+    if (point == B && sum <= C) continue;
+    for (let i = 0; i < linked[point].length; i++) {
+      let [nxt, c] = linked[point][i];
+      if (visited[nxt]) continue;
+      visited[nxt] = true;
+      stack.push([nxt, c]);
+    }
+    sum -= cost;
+  }
+  console.log(shy);
 }
