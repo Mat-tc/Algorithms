@@ -1,16 +1,17 @@
 const filePath =
-  process.platform === 'linux'
-    ? '/dev/stdin'
-    : 'C:/project/Algorithms/gajeong/예제.txt';
-let input = require('fs').readFileSync(filePath).toString().trim().split('\n');
+  process.platform === "linux"
+    ? "/dev/stdin"
+    : "C:/project/Algorithms/gajeong/예제.txt";
+let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
 const N = Number(input[0]);
 
 class Node {
-  constructor(value = '') {
+  constructor(value = "") {
     this.value = value; //현재 경로까지의 누적값
     this.end = false; //해당 노드에서 끝나는 문자열이 있는지 여부
     this.child = {}; //자식
+    this.cnt = 1;
   }
 }
 
@@ -21,7 +22,7 @@ class Trie {
 
   insert(string) {
     let currentNode = this.root; //루트노드를 시작으로 탐색하면서 삽입한다
-    let nick = '';
+    let nick = "";
     for (let i = 0; i < string.length; i++) {
       const currentChar = string[i];
 
@@ -30,12 +31,20 @@ class Trie {
         currentNode.child[currentChar] = new Node(
           currentNode.value + currentChar
         );
-        nick = currentNode.value + currentChar;
+        if (nick.length == 0) nick = currentNode.value + currentChar;
       }
 
       currentNode = currentNode.child[currentChar]; // 자식 노드로 이동한다.
+      if (currentNode.value == string && currentNode.end == true) {
+        currentNode.cnt += 1;
+        nick = currentNode.value + `${currentNode.cnt}`;
+      }
+
+      if (currentNode.value == string && nick.length == 0)
+        nick = currentNode.value;
     }
     currentNode.end = true; //해당 노드에서 끝나는 단어가 있음을 알린다
+
     return nick;
   }
 
@@ -61,4 +70,4 @@ for (let i = 1; i <= N; i++) {
   let str = t.insert(input[i]);
   answer.push(str);
 }
-console.log(answer.join('\n'));
+console.log(answer.join("\n"));

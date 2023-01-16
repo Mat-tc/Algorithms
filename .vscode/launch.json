@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Launch coffee",
+      "request": "launch",
+      "mainClass": "gajeong.coffee",
+      "projectName": "Algorithms_baab4772"
+    },
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch Chrome against localhost",
