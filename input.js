@@ -13,11 +13,12 @@ const stdin = fs.readFileSync('/dev/stdin').toString();
 solution(stdin);
 
 //예시 입력 시,
-const fs = require('fs');
-let input = fs
-  .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
+const filePath =
+  process.platform === 'linux'
+    ? '/dev/stdin'
+    : 'C:/project/Algorithms/gajeong/예제.txt';
+let input = require('fs')
+  .readFileSync(filePath)
   .toString()
   .trim()
   .split('\r\n');
-solution(input);
-function solution(input) {}
