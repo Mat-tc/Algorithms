@@ -1,16 +1,4 @@
-5 10
-baekjoononlinejudge
-startlink
-codeplus
-sundaycoding
-codingsh
-baekjoon
-star
-start
-code
-sunday
-coding
-cod
-online
-judge
-plus
+1
+2
+9999999999
+9
