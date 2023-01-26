@@ -23,7 +23,6 @@ function solution(k, ranges) {
     else if (start == width.length + end) answer.push(0);
     else answer.push(sum);
   });
-  console.log(answer);
   return answer;
 }
 
