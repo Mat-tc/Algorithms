@@ -1,5 +1,13 @@
 function solution(users, emoticons) {
   var answer = [];
+
+  const recursion = (d, p, price) => {
+    if (d == emoticons.length) {
+      for (let i = 0; i < users.length; i++){
+        if 
+      }
+    }
+  }
   return answer;
 }
 
