@@ -19,7 +19,6 @@ function solution(relation) {
   let row = relation[0].length;
 
   let numbers = Array.from({ length: row }, (v, i) => i);
-  console.log(numbers);
   const P = [];
   for (let i = 0; i < row; i++) {
     let t = {};
@@ -33,9 +32,7 @@ function solution(relation) {
     P.push(t);
   }
 
-  // for (let i = 0; i < row; i++){
-  //   for (let j = i + 1;  )
-  // }
+  for (let i = 1; i <= numbers.length; i++) {}
 
   return answer;
 }
