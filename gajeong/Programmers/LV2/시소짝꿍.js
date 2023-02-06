@@ -1,29 +1,42 @@
 function solution(weights) {
   var answer = 0;
+  const map = {};
 
   weights.sort((a, b) => a - b);
+  const member = [];
+  for (let i = 0; i < weights.length; i++) {
+    if (!map[weights[i]]) {
+      map[weights[i]] = 1;
+      member.push(weights[i]);
+    } else {
+      answer += map[weights[i]];
+      map[weights[i]] += 1;
+    }
+  }
 
-  for (let pre = 0; pre < weights.length - 1; pre++) {
-    for (let nxt = pre + 1; nxt < weights.length; nxt++) {
-      if (weights[pre] * 3 < weights[nxt]) break;
-      if (weights[pre] == weights[nxt]) {
-        ++answer;
-        continue;
+  const N = member.length;
+  console.log(member);
+
+  for (let pre = 0; pre < N - 1; pre++) {
+    let sum = 0;
+    for (let nxt = pre + 1; nxt < N; nxt++) {
+      if (member[pre] * 2 < member[nxt]) break;
+
+      if (member[pre] * 2 == member[nxt]) {
+        sum += map[member[nxt]];
       }
-      if (weights[pre] * 2 == weights[nxt]) {
-        ++answer;
-        continue;
+      if (member[pre] * 3 == member[nxt] * 2) {
+        sum += map[member[nxt]];
       }
-      if (weights[pre] * 3 == weights[nxt] * 2) {
-        ++answer;
-        continue;
-      }
-      if (weights[pre] * 4 == weights[nxt] * 3) {
-        ++answer;
+      if (member[pre] * 4 == member[nxt] * 3) {
+        sum += map[member[nxt]];
       }
     }
+    if (map[member[pre]] > 1) {
+      answer += map[member[pre]] * sum;
+    } else answer += sum;
   }
   return answer;
 }
 
-console.log(solution([100, 180, 360, 100, 270]));
+console.log(solution([100, 100, 100, 1]));
