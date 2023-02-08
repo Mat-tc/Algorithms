@@ -1,20 +1,21 @@
 function solution(land) {
   var answer = 0;
   const N = land.length;
-  const arr = [];
-  land.forEach((row) => {
-    arr.push(row.indexOf(Math.max(...row)));
-  });
+  const map = Array.from({ length: N }, () => Array(4).fill(0));
+  console.log(map);
+  for (let i = 0; i < 4; i++) {
+    map[0][i] = land[0][i];
+  }
 
-  for (let now = 0; now < N; now++) {
-    // 첫번째 열, 마지막 열 조건 처리 해줘야함
-    let pre = now - 1;
-    let nxt = now + 1;
-
-    if (pre == now) {
+  for (let i = 1; i < N; i++) {
+    for (let j = 0; j < 4; j++) {
+      map[i][j] =
+        Math.max(...map[i - 1].slice(0, j), ...map[i - 1].slice(j + 1, 4)) +
+        land[i][j];
     }
   }
-  return answer;
+
+  return Math.max(...map[N - 1]);
 }
 
 console.log(
