@@ -1,8 +1,7 @@
 function solution(land) {
-  var answer = 0;
   const N = land.length;
   const map = Array.from({ length: N }, () => Array(4).fill(0));
-  console.log(map);
+
   for (let i = 0; i < 4; i++) {
     map[0][i] = land[0][i];
   }
