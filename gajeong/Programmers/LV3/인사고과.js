@@ -10,7 +10,6 @@ function solution(scores) {
   let rank = 1;
   let hold = 0;
 
-  console.log(scores);
   for (let i = 0; i < scores.length; i++) {
     let el = scores[i];
     if (mine[0] < el[0] && mine[1] < el[1]) return -1;
