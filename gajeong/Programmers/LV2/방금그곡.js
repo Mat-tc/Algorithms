@@ -19,6 +19,7 @@ function solution(m, musicinfos) {
     else if (str == 'D') return '3';
     else if (str == 'F') return '4';
     else if (str == 'G') return '5';
+    else if (str == 'E') return '6';
   };
   for (let i = 0; i < N; i++) {
     //1. 시간 구하기
