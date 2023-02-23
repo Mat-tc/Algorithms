@@ -1,14 +1,15 @@
-const fs = require("fs");
+const fs = require('fs');
 let input = fs
-  .readFileSync("C:/project/Algorithms/gajeong/예제.txt")
+  .readFileSync('C:/project/Algorithms/gajeong/예제.txt')
   .toString()
   .trim()
-  .split("\r\n");
+  .split('\r\n');
 solution(input);
 
 function solution(input) {
-  const [N, M] = input.shift().split(" ").map(Number);
-  const map = input.map((arr) => arr.split(" ").map(Number));
+  const [N, M] = input.shift().split(' ').map(Number);
+  const map = input.map((arr) => arr.split(' ').map(Number));
+
 
   // 1. 집의 위치 좌표 : H, 치킨집의 위치좌표 : C 기억
   const H = [];
@@ -22,12 +23,15 @@ function solution(input) {
 
   const HLength = H.length;
 
-  //2. DFS를 이용해서 하나하나씩 조합을 만들어서 실행해보도록 하지 . .
+
+  //2. BFS를 이용해서 하나하나씩 조합을 만들어서 실행해보도록 하지 . .>>>>>>> 8675aeee8dc3128fb308cf44ef19e72f9227c848
   // start => 현재 방문한 치킨짐 위치, cnt => M의 값을 넘는지 확인하기 위함
   // return 값 => 현재 좌표와의 거리
   const BFS = (start, cnt) => {
     let c_h = [];
+
     let min = 99999;
+
     for (let home = 0; home < HLength; home++) {
       c_h[home] =
         Math.abs(H[home][0] - C[start][0]) + Math.abs(H[home][1] - C[start][1]);
@@ -61,4 +65,3 @@ function solution(input) {
   console.log(min);
 
   return min;
-}
