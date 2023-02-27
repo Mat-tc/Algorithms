@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : `4 7
 6 13    
 4 8    
@@ -10,16 +10,16 @@ const input = (
 `
 )
   .trim()
-  .split('\n');
+  .split("\n");
 
 //
 solution(input);
 function solution(input) {
-  const [N, K] = input[0].split(' ').map(Number);
+  const [N, K] = input[0].split(" ").map(Number);
   let answer = 0;
   const B = [];
   for (let i = 1; i < 1 + N; i++) {
-    B.push(input[i].split(' ').map(Number));
+    B.push(input[i].split(" ").map(Number));
   }
   B.unshift(undefined);
 
@@ -47,6 +47,4 @@ function solution(input) {
     }
   }
   console.log(maxVSum[N][K]);
-
-  console.log(answer);
 }
