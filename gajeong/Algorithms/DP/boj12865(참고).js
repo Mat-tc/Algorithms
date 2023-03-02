@@ -48,5 +48,4 @@ function solution(input) {
   }
   console.log(maxVSum[N][K]);
 
-  console.log(answer);
 }
