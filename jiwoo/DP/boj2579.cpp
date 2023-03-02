@@ -3,11 +3,8 @@
 using namespace std;
 
 vector<int> v;
-int mem[301]; // 메모이제이션, 시간초과 막기 위함
+int mem[301];
 
-// 3개의 계단이 연속되지않아야 하기 때문에 x번째 계단이 가질 수 있는 가장 큰 값은
-// x - 2에서 두 칸 뛰던가 or x - 3의 dp값에 x - 1값을 더한 후 한 칸뛰던가
-// 그림을 보고 이해하는게 더 좋을 듯
 int dp(int x)
 {
     if (x == 0) return v[0];

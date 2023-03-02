@@ -8,8 +8,8 @@ int n[21][21];
 int result = 10000;
 
 void dfs(int idx, int cnt) {
-	if (cnt == N/2) {
-		int start_stats = 0;
+	if (cnt == N/2) { // 탈출조건
+		int start_stats = 0; 
         int link_stats = 0;
         vector<int> start;
         vector<int> link;
@@ -35,7 +35,9 @@ void dfs(int idx, int cnt) {
 		result = min(result, abs(start_stats-link_stats));
 		return;
 	}
-	for (int i = idx; i <= N; i++) {
+	for (int i = idx; i <= N; i++) // 백트래킹 재귀호출구조 idx로 안하면 
+                                 //ex) 1번 2번이 같은 팀 됐을 경우, 2번 1번이 같은 팀 됐을 경우 필요없는 검사
+    {
 		if (member[i] == 0) {
 			member[i] = 1;
 			dfs(i, cnt+1);
@@ -47,8 +49,8 @@ void dfs(int idx, int cnt) {
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
-
-	cin >> N;
+    // 입력받아서 배열에 저장
+	cin >> N; 
     for (int i = 1; i <= N; i++)
     {
         for (int j = 1; j <= N; j++)

@@ -9,7 +9,7 @@ int main()
 
     vector<vector<int>> v;
     int people[51] = {0};
-    int vis[51]= {0};
+    int vis[51] = {0};
     int cnt = 0;
     int N, M;
     cin >> N >> M;

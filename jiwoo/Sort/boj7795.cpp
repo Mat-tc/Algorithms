@@ -20,12 +20,10 @@ int main()
 
     while (T--)
     {
-        vector<int> A; // A의 크기들이 담긴 벡터
-        vector<int> B; // B의 크기들이 담긴 벡터
+        vector<int> A;
+        vector<int> B;
         
-        int cnt = 0; // 쌍의 개수 저장할 변수
-
-        // 입력받아서 벡터에 크기 저장
+        int cnt = 0;
         for (int i = 0; i < N; i++)
         {
             cin >> q;
@@ -36,12 +34,8 @@ int main()
             cin >> q;
             B.push_back(q);
         }
-
-        // 내림차순으로 정렬
         sort(A.begin(), A.end(), compare);
         sort(B.begin(), B.end(), compare);
-
-        // for문 돌면서 A[i]가 B[j]보다 커지는 기점으로 나머지는 다 A가 크다는 거니까 그만큼 cnt 올리고 브레이크
         for (int i = 0; i < N; i++)
         {
             for (int j = 0; j < M; j++)
@@ -53,8 +47,6 @@ int main()
                 }
             }
         }
-
-        // cnt 출력
         cout << cnt << "\n";
     }
 

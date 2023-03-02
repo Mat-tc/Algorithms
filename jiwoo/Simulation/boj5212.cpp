@@ -2,15 +2,15 @@
 
 using namespace std;
 
-vector<string> curmap;
-vector<string> futuremap;
+vector<string> curmap; // 현재맵
+vector<string> futuremap; // 미래맵
 
 int dx[4] = {1, 0, -1, 0};
 int dy[4] = {0, 1, 0, -1};
 int R, C;
 int cnt = 0;
 
-void eraseLine(int cnt)
+void eraseLine(int cnt) // 위아래 필요없는 라인지우기
 {
     while (find(futuremap[cnt].begin(), futuremap[cnt].end(), 'X') == futuremap[cnt].end())
     {
@@ -21,7 +21,7 @@ void eraseLine(int cnt)
     }
 }
 
-void eraseLine2(int cnt)
+void eraseLine2(int cnt) // 좌,우 필요없는 라인 지우기
 {
     string tmp;
     while (1)
@@ -92,7 +92,7 @@ int main()
     eraseLine(R - 1);
     
     eraseLine2(0);
-    eraseLine2(C-1);
+    eraseLine2(C - 1);
 
     for (int i = 0; i < R; i++)
     {
