@@ -62,6 +62,6 @@ int main()
     c.push_back(3);
 
     cout << solution(s,c);
-
+    
     return 0;
 }

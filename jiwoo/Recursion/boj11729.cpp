@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+/*#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -23,4 +23,4 @@ int main() {
     cout << (1 << num) - 1 << "\n"; // 2의 n승은 shift연산으로 구할 수 있음 pow는 큰 수 오차발생
 
     hanoi(num, 1, 3, 2);
-}
+}*/
