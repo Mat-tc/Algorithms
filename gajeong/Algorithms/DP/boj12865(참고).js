@@ -46,5 +46,6 @@ function solution(input) {
       }
     }
   }
+  console.log(maxVSum);
   console.log(maxVSum[N][K]);
 }
