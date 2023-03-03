@@ -1,10 +1,10 @@
 // TODO 커플디펜스
 
 // ! 틀린이유 => "동시에 공격한다"
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync("/dev/stdin").toString()
     : `5 5 1
 0 0 0 0 0
 0 0 0 0 0
@@ -14,16 +14,16 @@ const input = (
 `
 )
   .trim()
-  .split('\n');
+  .split("\n");
 
 //
 solution(input);
 function solution(input) {
   //N : 세로 , M : 가로, D : 공격 제한 거리
-  const [N, M, D] = input[0].split(' ').map(Number);
+  const [N, M, D] = input[0].split(" ").map(Number);
   const Map = [];
   for (let i = 1; i < input.length; i++) {
-    Map.push(input[i].split(' ').map(Number));
+    Map.push(input[i].split(" ").map(Number));
   }
   Map.push(Array(M).fill(0));
   console.log(Map);
@@ -48,9 +48,9 @@ function solution(input) {
         while (queue.length) {
           console.log(queue);
           let [x, y, dist] = queue.shift();
-          if (m[y][x] == 1) {
-            m[y][x] = 0;
-            st = true;
+          if (m[y][x] != 1) {
+            m[y][x] = 2;
+            cnt++;
             break;
           }
           //양궁 거리 조건
@@ -65,7 +65,6 @@ function solution(input) {
             queue.push([toX, toY, dist + 1]);
           }
         }
-        if (st) cnt++;
       }
       console.log(cnt);
     }
