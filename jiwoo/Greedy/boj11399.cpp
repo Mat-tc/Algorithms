@@ -12,13 +12,12 @@ int main() {
     int tmp = 0;
     int ans = 0;
     cin >> N;
-    
     for (int i = 0; i < N; i++)
     {
         cin >> a;
         v.push_back(a);
     }
-    while (v.size())
+    while(v.size())
     {
         tmp = tmp + *min_element(v.begin(),v.end());
         ans = ans + tmp;

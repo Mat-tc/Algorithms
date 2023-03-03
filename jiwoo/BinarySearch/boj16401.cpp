@@ -16,11 +16,12 @@ int main()
         cin >> L;
         v.push_back(L);
     }
+    //sort(v.begin(),v.end());
 
     int sh = 1; // short
     int lo = *max_element(v.begin(), v.end()); // long
     
-    while (sh <= lo) // 이분탐색
+    while (sh <= lo)
     {
         int mid = (sh + lo) / 2;
         int cnt = 0;
@@ -41,4 +42,11 @@ int main()
 
     cout << ans;
     return 0;
+}
+
+
+int rec(int a){
+    if (a == 0) return 1;
+    if (a == 1) return 1;
+    return (a)*rec(a-1);
 }

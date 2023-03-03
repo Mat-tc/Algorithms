@@ -13,8 +13,6 @@ int dp(int x)
     return mem[x];
 }
 
-// 이거도 결과값 쭉 적어놓으면 규칙이 보임
-
 int main()
 {
     ios::sync_with_stdio(0);

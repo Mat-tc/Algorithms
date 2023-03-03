@@ -10,7 +10,7 @@ void DFS(int a)
     if (vis[a] != 0)
         return;
     vis[a] = 1;
-    if (color[a] == 0)
+    if (color[a] == 0) // 아예 연결안됐을때 or 1일 때
     {
         color[a] = 1;
     }
@@ -20,7 +20,7 @@ void DFS(int a)
         {
             if (color[vertics[a][i]] == 1)
             {
-                flag = 1;
+                flag = 1; // 1이면 잘못됐다는 뜻
                 return;
             }
             color[vertics[a][i]] = 2;

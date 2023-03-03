@@ -27,6 +27,10 @@ function solution(input) {
     in_degree[line[0]] = line.length - 2;
     Order[line[0]] = [...line.slice(1, in_degree[line[0]] + 1)];
   }
-  console.log(in_degree);
-  console.log(Order);
+  
+
+  for (let i = 1; i <= N; i++){
+    if(in_degree[i] == 0 ) 
+  }
+  while()
 }
