@@ -24,7 +24,7 @@ function solution(input) {
   const HLength = H.length;
 
 
-  //2. BFS를 이용해서 하나하나씩 조합을 만들어서 실행해보도록 하지 . .>>>>>>> 8675aeee8dc3128fb308cf44ef19e72f9227c848
+  //2. BFS를 이용해서 하나하나씩 조합을 만들어서 실행해보도록 하지 
   // start => 현재 방문한 치킨짐 위치, cnt => M의 값을 넘는지 확인하기 위함
   // return 값 => 현재 좌표와의 거리
   const BFS = (start, cnt) => {

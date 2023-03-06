@@ -1,11 +1,11 @@
 // 제출용
-
+// ! 다시 풀어오기
 //예시 입력 시,
 const filePath =
-  process.platform === 'linux'
-    ? '/dev/stdin'
-    : 'C:/project/Algorithms/gajeong/예제.txt';
-let input = require('fs').readFileSync(filePath).toString().trim().split('\n');
+  process.platform === "linux"
+    ? "/dev/stdin"
+    : "C:/project/Algorithms/gajeong/예제.txt";
+let input = require("fs").readFileSync(filePath).toString().trim().split("\n");
 
 solution(input);
 function solution(input) {
@@ -15,7 +15,7 @@ function solution(input) {
   let total = 0;
   const S = [];
   for (let i = 1; i < 1 + N; i++) {
-    let s = input[i].split(' ').map(Number);
+    let s = input[i].split(" ").map(Number);
     S.push(s);
     total += s[0] - 1;
   }
@@ -28,7 +28,7 @@ function solution(input) {
 
   for (let n = 1; n <= N; n++) {
     let [count, cost] = S[n];
-    count -= 1;
+    count -= 2;
 
     for (let k = 1; k <= M; k++) {
       if (k <= count) {

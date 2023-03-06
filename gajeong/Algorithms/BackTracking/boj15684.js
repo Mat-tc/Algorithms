@@ -36,7 +36,7 @@ function solution(input) {
   };
 
   const BackTracking = (dep, k) => {
-    if (ans != 5) return;
+    if (ans != 4) return;
     if (dep > k) {
       if (check()) ans = k;
       return;
@@ -58,7 +58,7 @@ function solution(input) {
 
   for (let i = 0; i < 3; i++) {
     BackTracking(1, i);
-    if (ans != 5) {
+    if (ans != 4) {
       console.log(ans);
       return;
     }
