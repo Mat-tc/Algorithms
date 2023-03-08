@@ -2,61 +2,78 @@ const fs = require('fs');
 const input = (
   process.platform === 'linux'
     ? fs.readFileSync('/dev/stdin').toString()
-    : `2
-10 8 17
-0 0
-1 0
-1 1
+    : `1
+5 3 6
+0 2
+1 2
+2 2
+3 2
 4 2
-4 3
-4 5
-2 4
-3 4
-7 4
-8 4
-9 4
-7 5
-8 5
-9 5
-7 6
-8 6
-9 6
-10 10 1
-5 5`
+4 0`
 )
   .trim()
   .split('\n');
 
-// * 도착점과, 출발점을 포함하는 원의 갯수
-// 한 원에 대하여 도착점과 출발점으로 모두 가지고 있다면 => 0
-// 둘다 가지고 있지 않다면 => 0
-// 하나만 가지고 있다면 => 1
-
-// 원의 좌표 + 반지름의 길이   이내에 x, y 좌표가 있는경우
-
-const solution = (input) => {
+// * 섬갯수 구하기 문제 => BFS 가 더 편할듯
+function solution(input) {
   const T = Number(input.shift());
   const answer = [];
   let j = 0;
   for (let t = 0; t < T; t++) {
-    let [x1, y1, x2, y2] = input[0 + j].split(' ').map(Number);
-    let n = Number(input[1 + j]);
-    let cnt = 0;
-    for (let i = 2 + j; i < 2 + n + j; i++) {
-      let [cx, cy, r] = input[i].split(' ').map(Number);
-
-      let start = false;
-      let end = false;
-
-      if ((cx - x1) ** 2 + (cy - y1) ** 2 < r ** 2) start = true;
-      if ((cx - x2) ** 2 + (cy - y2) ** 2 < r ** 2) end = true;
-
-      if (start ^ end) ++cnt;
+    let [M, N, K] = input[0 + j].split(' ').map(Number);
+    let baechu = [];
+    for (let i = 1 + j; i <= K + j; i++) {
+      baechu.push(input[i].split(' ').map(Number));
     }
-    answer.push(cnt);
-    j += n + 2;
+    answer.push(BFS(M, N, K, baechu));
+    j += K + 1;
   }
   console.log(answer.join('\n'));
-};
+}
+
+//가로 M 새로 N
+function BFS(M, N, K, baechu) {
+  const map = Array.from(Array(N), () => Array(M).fill(0));
+  baechu.forEach((el) => {
+    let [x, y] = el;
+    map[y][x] = 1;
+  });
+  const visited = Array.from(Array(N), () => Array(M).fill(false));
+  let cnt = 0;
+  for (let j = 0; j < N; j++) {
+    for (let i = 0; i < M; i++) {
+      let queue = [];
+      let idx = 0;
+      if (visited[j][i] == false && map[j][i] == 1) {
+        queue.push([i, j]);
+        ++cnt;
+        visited[j][i] = true;
+        //BFS 의 시작
+        while (idx < queue.length) {
+          let [x, y] = queue[idx];
+
+          const dx = [1, 0, -1, 0];
+          const dy = [0, -1, 0, 1];
+          for (let d = 0; d < 4; d++) {
+            if (
+              y + dy[d] < 0 ||
+              x + dx[d] < 0 ||
+              x + dx[d] > M - 1 ||
+              y + dy[d] > N - 1
+            )
+              continue;
+            if (map[y + dy[d]][x + dx[d]] && !visited[y + dy[d]][x + dx[d]]) {
+              queue.push([x + dx[d], y + dy[d]]);
+              visited[y + dy[d]][x + dx[d]] = true;
+            }
+          }
+          idx++;
+        }
+      }
+    }
+  }
+
+  return cnt;
+}
 
 solution(input);
