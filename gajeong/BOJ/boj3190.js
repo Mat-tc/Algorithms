@@ -1,7 +1,7 @@
-const fs = require('fs');
+const fs = require("fs");
 const input = (
-  process.platform === 'linux'
-    ? fs.readFileSync('/dev/stdin').toString()
+  process.platform === "linux"
+    ? fs.readFileSync(0).toString().trim().split("\n")
     : `20
 13
 6 15
@@ -39,21 +39,21 @@ const input = (
 114 D`
 )
   .trim()
-  .split('\n');
+  .split("\n");
 
 function solution(input) {
   const N = Number(input[0]);
   const K = Number(input[1]);
   const Map = Array.from(Array(N), () => Array(N).fill(0));
   for (let i = 2; i < 2 + K; i++) {
-    let [r, c] = input[i].split(' ').map(Number);
+    let [r, c] = input[i].split(" ").map(Number);
     Map[r - 1][c - 1] = 1;
   }
 
   const C = Number(input[2 + K]);
   const Direction = [];
   for (let i = K + 3; i < K + 3 + C; i++) {
-    Direction.push(input[i].split(' '));
+    Direction.push(input[i].split(" "));
   }
 
   // [ y , x ] 순으로 합시다.
@@ -71,7 +71,7 @@ function solution(input) {
     let head = [baem[length][0] + dy[d], baem[length][1] + dx[d]];
     length++;
     // 사과가 없다면, 꼬리 없애 주기
-    if (Map[head[0]][head[1]] == 0 && t > 1) {
+    if (Map[head[0]][head[1]] != 1 && t > 1) {
       let tail = baem.shift();
       --length;
       Map[tail[0]][tail[1]] = 0;
@@ -87,7 +87,7 @@ function solution(input) {
     // 바꿔야하는 지시사항 시간에 도달했을 때.
     if (c < Direction.length) {
       if (t == Number(Direction[c][0])) {
-        if (Direction[c][1] == 'D') d++;
+        if (Direction[c][1] == "D") d++;
         else d--;
 
         if (d > 3) d = 0;
