@@ -1,6 +1,3 @@
-// * memoization 을 해야할 것 같은데
-// * 100,000 * 100,000 이면 메모리 초과가 나지 않을까 ?
-
 function solution(n, roads, sources, destination) {
   var answer = [];
   const map = Array.from(Array(n + 1), () => []);
@@ -11,61 +8,46 @@ function solution(n, roads, sources, destination) {
     map[b].push(a);
   }
 
-  for (let i = 0; i < sources.length; i++) {
-    //시작점
-    let start = sources[i];
+  // 목적지에서 각 점으로 도달할 수 있는지 반대로 계산하면 됨.
+  let start = destination;
 
-    // 시작지랑 목적지 같을 경우 0
-    if (start === destination) {
-      answer.push(0);
-      continue;
-    }
+  const visited = Array(n + 1).fill(false);
+  const dist = Array(n + 1).fill(-1);
+  visited[start] = true;
+  dist[start] = 0;
+  const queue = [[start, 0]];
 
-    let idx = 0;
-    const visited = Array(n + 1).fill(false);
-    visited[start] = true;
-    const queue = [];
-    for (let v = 0; v < map[start].length; v++) {
-      let nxt = map[start][v];
+  let idx = 0;
+  while (queue.length > idx) {
+    //종료조건
+
+    let [now, d] = queue[idx];
+
+    for (let k = 0; k < map[now].length; k++) {
+      let nxt = map[now][k];
+      if (visited[nxt]) continue;
+      queue.push([nxt, d + 1]);
       visited[nxt] = true;
-      queue.push([nxt, 1]);
+      dist[nxt] = d + 1;
     }
 
-    while (true) {
-      //종료조건
-      if (queue.length <= idx) {
-        answer.push(-1);
-        break;
-      }
-      if (queue[idx][0] === destination) {
-        answer.push(queue[idx][1]);
-        break;
-      }
-
-      let [now, d] = queue[idx];
-
-      for (let k = 0; k < map[now].length; k++) {
-        let nxt = map[now][k];
-        if (visited[nxt]) continue;
-        queue.push([nxt, d + 1]);
-        visited[nxt] == true;
-      }
-
-      ++idx;
-    }
+    ++idx;
   }
+
+  sources.forEach((s) => {
+    answer.push(dist[s]);
+  });
+
   return answer;
 }
-
-solution(
-  5,
-  [
-    [1, 2],
-    [1, 4],
-    [2, 4],
-    [2, 5],
-    [4, 5],
-  ],
-  [1, 3, 5],
-  5
+console.log(
+  solution(
+    3,
+    [
+      [1, 2],
+      [2, 3],
+    ],
+    [2, 3],
+    1
+  )
 );
