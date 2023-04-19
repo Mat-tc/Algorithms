@@ -1,54 +1,53 @@
 function solution(m, n, board) {
+  // n 가로 m 세로
   var answer = 0;
 
-  const map = board.map((el) => el.split(""));
-  const visited = Array.from(Array(m), () => Array(n).fill(false));
-
-  //방향 -> 오른쪽 , 아래, 오른쪽 대각선
-  const dx = [1, 0, 1];
-  const dy = [0, 1, 1];
-
-  const BFS = (x, y, c) => {
-    for (let d = 0; d < 3; d++) {
-      let toX = x + dx[d];
-      let toY = y + dy[d];
-
-      if (toX > n - 1 || toY > m - 1) return;
-      if (c != board[toY][toX]) return;
-    }
-
-    //삭제 될 배열 체크해주기
-    visited[y][x] = true;
-    for (let d = 0; d < 3; d++) {
-      let toX = x + dx[d];
-      let toY = y + dy[d];
-
-      visited[toY][toX] = true;
-    }
-    return true;
-  };
+  const map = board.map((el) => el.split(''));
 
   while (true) {
-    for (let j = 0; j < m; j++) {
-      for (let i = 0; i < n; i++) {
-        BFS(i, j, map[j][i]);
-      }
-    }
-
-    for (let j = 0; j < m; j++) {
-      for (let i = 0; i < n; i++) {
-        if (visited[j][i]) {
-          ++answer;
-          map[j][i] = "0";
+    const del = Array.from(Array(m), () => Array(m).fill(false));
+    let cnt = 0;
+    for (let j = 0; j < m - 1; j++) {
+      for (let i = 0; i < n - 1; i++) {
+        let c = map[j][i];
+        if (
+          c == map[j + 1][i] &&
+          c == map[j][i + 1] &&
+          c == map[j + 1][i + 1]
+        ) {
+          if (!del[j][i]) {
+            ++cnt;
+            del[j][i] = true;
+          }
+          if (!del[j][i + 1]) {
+            ++cnt;
+            del[j][i + 1] = true;
+          }
+          if (!del[j + 1][i]) {
+            ++cnt;
+            del[j + 1][i] = true;
+          }
+          if (!del[j + 1][i + 1]) {
+            ++cnt;
+            del[j + 1][i + 1] = true;
+          }
         }
       }
     }
+
+    for (let j = 0; j < m; j++) {
+      for (let i = 0; i < n; i++) {
+        if (del[j][i]) map[j][i] = 'X';
+      }
+    }
+
+    if (cnt == 0) break;
   }
 
   return answer;
 }
 
-console.log(solution(4, 5, ["CCBDE", "AAADE", "AAABF", "CCBBF"]));
+console.log(solution(4, 5, ['CCBDE', 'AAADE', 'AAABF', 'CCBBF']));
 console.log(
-  solution(6, 6, ["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"])
+  solution(6, 6, ['TTTANT', 'RRFACC', 'RRRFCC', 'TRRRAA', 'TTMMMF', 'TMMTTJ'])
 );
