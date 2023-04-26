@@ -50,9 +50,7 @@ int main()
         for (int i = 0; i < g[node].size(); i++)
         {
             int nextNode = g[node][i];
-            {
-                mintimes[nextNode] = max(mintimes[nextNode], mintimes[node] + times[node]);
-            }
+            mintimes[nextNode] = max(mintimes[nextNode], mintimes[node] + times[node]);
             ind[nextNode]--;
             if (ind[nextNode] == 0)
             {
