@@ -1,43 +1,39 @@
 function solution(line) {
   var answer = [];
-  let minX = 9999999;
-  let minY = 9999999;
+  const INF = Number.MAX_SAFE_INTEGER;
+  let minX = INF;
+  let minY = INF;
+  let maxX = -INF;
+  let maxY = -INF;
+
   for (let i = 0; i < line.length; i++) {
     for (let j = i + 1; j < line.length; j++) {
       let [A, B, E] = line[i];
       let [C, D, F] = line[j];
       let x = (B * F - E * D) / (A * D - B * C);
       let y = (E * C - A * F) / (A * D - B * C);
-      if (A * D == B * C) continue;
-      if (x % 1 == 0 && y % 1 == 0) {
+      if (A * D === B * C) continue;
+      if (x % 1 === 0 && y % 1 === 0) {
         answer.push([x, y]);
         if (x < minX) minX = x;
         if (y < minY) minY = y;
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
       }
     }
   }
 
-  let maxX = -9999999;
-  let maxY = -9999999;
-
-  const crossPoint = [];
-  answer.forEach((el) => {
-    if (el[0] > maxX) maxX = el[0];
-    if (el[1] > maxY) maxY = el[1];
-  });
-
-  // 보드를 생성한다.
-  let board = Array.from(
-    Array(maxY - minY + 1 > 1000 ? 1000 : maxY - minY + 1),
-    () => Array(maxX - minX + 1 > 1000 ? 1000 : maxX - minX + 1).fill('.')
+  const paper = [...Array(maxY - minY + 1)].map(() =>
+    [...Array(maxX - minX + 1)].map(() => '.')
   );
 
-  // 교점의 위치에 별을 그린다.
   answer.forEach(([x, y]) => {
-    if (maxY - y < 1000 && x - minX < 1000) board[maxY - y][x - minX] = '*';
+    paper[maxY - y][x - minX] = '*';
   });
 
-  return board.map((x) => x.join(''));
+  return paper.map((v) => v.join(''));
 }
 
 console.log(
