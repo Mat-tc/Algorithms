@@ -25,15 +25,14 @@ function solution(line) {
     }
   }
 
-  const paper = [...Array(maxY - minY + 1)].map(() =>
-    [...Array(maxX - minX + 1)].map(() => '.')
+  const draw = Array.from(Array(maxY - minY + 1), () =>
+    Array(maxX - minX + 1).fill('.')
   );
-
   answer.forEach(([x, y]) => {
-    paper[maxY - y][x - minX] = '*';
+    draw[maxY - y][x - minX] = '*';
   });
 
-  return paper.map((v) => v.join(''));
+  return draw.map((v) => v.join(''));
 }
 
 console.log(
