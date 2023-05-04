@@ -1,28 +1,49 @@
 function solution(cap, n, deliveries, pickups) {
-  var answer = 0;
-  let d = cap;
-  let p = 0;
-  let length = 0;
-  let idx = n - 1;
+  let dPoint = -1;
+  let pPoint = -1;
+  let answer = 0;
+
   for (let i = n - 1; i >= 0; i--) {
-    if (deliveries[i] || pickups[i]) {
-      idx = i;
+    if (deliveries[i] > 0) {
+      dPoint = i;
       break;
     }
   }
-  for (let i = idx; i >= 0; i--) {
-    d -= deliveries[i];
-    p += pickups[i];
-    length++;
-    if (d < 0 || p > cap) {
-      answer += (length + i) * 2;
-      d + cap > cap ? (d = cap) : (d = d + cap);
-      p <= cap ? (p = 0) : (p = pickups[i]);
-      length = 1;
+  for (let i = n - 1; i >= 0; i--) {
+    if (pickups[i] > 0) {
+      pPoint = i;
+      break;
     }
   }
-  answer += length * 2;
+
+  while (dPoint > -1 || pPoint > -1) {
+    answer += Math.max(dPoint + 1, pPoint + 1) * 2;
+    let dCnt = 0;
+    let pCnt = 0;
+    //배달
+    while (dCnt < cap || deliveries[dPoint] === 0) {
+      if (dPoint < 0) break;
+      if (deliveries[dPoint] && dCnt < cap) {
+        deliveries[dPoint]--;
+        dCnt++;
+      } else {
+        dPoint--;
+      }
+    }
+
+    //픽업
+    while (pCnt < cap || pickups[pPoint] === 0) {
+      if (pPoint < 0) break;
+      if (pickups[pPoint] && pCnt < cap) {
+        pickups[pPoint]--;
+        pCnt++;
+      } else {
+        pPoint--;
+      }
+    }
+  }
+
   return answer;
 }
-solution(4, 5, [1, 0, 3, 1, 2], [0, 3, 0, 4, 0]);
-solution(2, 7, [1, 0, 2, 0, 1, 0, 2], [0, 2, 0, 1, 0, 2, 0]);
+console.log(solution(2, 5, [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]));
+//console.log(solution(2, 7, [1, 0, 2, 0, 1, 0, 2], [0, 2, 0, 1, 0, 2, 0]));
