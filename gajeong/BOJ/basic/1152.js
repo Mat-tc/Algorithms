@@ -1,3 +1,4 @@
+'use strict';
 const filePath =
   process.platform === 'linux'
     ? '/dev/stdin'
@@ -6,13 +7,30 @@ let input = require('fs')
   .readFileSync(filePath)
   .toString()
   .trim()
-  .split('\n');
+  .split('\n')
+  .map((line) => line.trim());
 
 function solution(input) {
-  const word = input[0].trim().split(' ');
+  const answer = [];
+  for (let i = 0; i < input.length - 1; i++) {
+    const data = input[i].split('');
+    let status = palindrome(data);
+    status ? answer.push('yes') : answer.push('no');
+  }
 
-  if (word.length === 1 && word[0] === '') console.log(0);
-  else console.log(word.length);
+  console.log(answer.join('\n'));
+}
+
+function palindrome(data) {
+  let [head, tail] = [0, data.length - 1];
+  while (head <= tail) {
+    if (data[head] != data[tail]) break;
+    head += 1;
+    tail -= 1;
+  }
+
+  if (head > tail) return true;
+  else return false;
 }
 
 solution(input);
